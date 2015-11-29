@@ -4,6 +4,7 @@
   "description": "A fancy, Node-based system for FRC webcast overlays.",
   "dependencies": {
     "express": "4.x.x",
+    "mkdirp": "^0.5.1",
     "nunjucks": "2.x.x"
   },
   "devDependencies": {
