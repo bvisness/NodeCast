@@ -1,3 +1,5 @@
+var common = require('./common.js');
+
 var BUILTIN_TYPES = [
     "boolean",
     "number",
@@ -8,13 +10,6 @@ var BUILTIN_TYPES = [
 ];
 
 var types = {};
-
-//
-// Private functions
-//
-function isRealObject(object) {
-    return (typeof object === "object" && object !== null && !Array.isArray(object));
-}
 
 // 
 // Public functions
@@ -35,7 +30,7 @@ function registerType(name, fields) {
                 if (!isBuiltinType && !isRegisteredType) {
                     throw "Type " + fields[fieldName] + " not recognized.";
                 }
-            } else if (isRealObject(fields[fieldName])) {
+            } else if (common.isRealObject(fields[fieldName])) {
                 // Recursively check this field's fields
                 validateFields(fields[fieldName]);
             } else {
@@ -60,7 +55,7 @@ function registerType(name, fields) {
 module.exports.registerType = registerType;
 
 function isValidInstance(object, type, exceptions) {
-    if (!isRealObject(object)) {
+    if (!common.isRealObject(object)) {
         throw "isValidInstance can only be used to validate objects";
     }
     
