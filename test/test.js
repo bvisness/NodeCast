@@ -1,6 +1,9 @@
 var assert = require('chai').assert;
 var strictobject = require('../strictobject.js');
 var frcdb = require('../frcdb.js');
+var jsondb = require('../jsondb.js');
+var common = require('../common.js');
+var fs = require('fs');
 
 describe("strictobject", function() {
     describe("registerType(name, fields)", function() {
@@ -226,190 +229,218 @@ describe("strictobject", function() {
     });
 });
 
-describe("frcdb", function() {
-    describe("getTeam(team)", function() {
-        before(function() {
-            frcdb.saveTeam({
-                "name": "The Fighting Calculators",
-                "number": 2175
-            });
+describe("jsondb", function() {
+    describe("registerType", function() {
+        beforeEach(function() {
+            jsondb.removeAll("jsondbType");
         });
 
-        it("should return undefined for unknown teams", function() {
-            assert.isUndefined(frcdb.getTeam(9999));
-        });
-        it("should return undefined for degenerate input", function() {
-            assert.isUndefined(frcdb.getTeam(false));
-            assert.isUndefined(frcdb.getTeam([1, 2, 3]));
-        });
-        it("should return a valid team object for a known team", function() {
-            var team = frcdb.getTeam(2175);
-            assert.isOk(team);
-            assert.isTrue(strictobject.isValidInstance(team, "team"));
-        });
-
-        after(function() {
-            frcdb.deleteTeam(2175);
-        });
-    });
-
-    describe("saveTeam(team)", function() {
-        it("should work for valid teams", function() {
-            var team = {
-                "name": "The Fighting Calculators",
-                "number": 2175
+        it("should accept valid types", function() {
+            var structure = {
+                "foo": "string",
+                "bar": {
+                    "daft": "number",
+                    "punk": "boolean"
+                }
             };
-            assert.isTrue(frcdb.saveTeam(team));
-        });
-        it("should fail for invalid teams (but not throw exception)", function() {
-            var team = {
-                "name": "The Invalid Calculators"
-            };
-            assert.isFalse(frcdb.saveTeam(team));
             assert.doesNotThrow(function() {
-                frcdb.saveTeam(team);
+                jsondb.registerType("jsondbType", structure, "foo");
             });
         });
-    });
-
-    describe("deleteTeam(teamNumber)", function() {
-        before(function() {
-            frcdb.saveTeam({
-                "name": "The Fighting Calculators",
-                "number": 2175
-            });
+        it("should reject duplicate types", function() {
+            var structure = {"foo": "string"};
+            assert.throws(function() {
+                jsondb.registerType("jsondbType", structure, "foo");
+                jsondb.registerType("jsondbType", structure, "foo");
+            }, "was already registered");
         });
-
-        it("should return false for unknown teams", function() {
-            assert.isFalse(frcdb.deleteTeam(9999));
+        it("should require a primary key to be specified", function() {
+            var structure = {"foo": "string"};
+            assert.throws(function() {
+                jsondb.registerType("jsondbType", structure);
+            }, "You must provide a primary key");
         });
-        it("should return true for successful deletion", function() {
-            assert.isTrue(frcdb.deleteTeam(2175));
-            assert.isUndefined(frcdb.getTeam(2175));
+        it("should require the structure to have the primary key as a property", function() {
+            var structure = {"foo": "string"};
+            assert.throws(function() {
+                jsondb.registerType("jsondbType", structure, "bar");
+            }, "does not have primary key");
         });
 
         after(function() {
-            frcdb.deleteTeam(2175);
+            jsondb.removeAll("jsondbType");
         });
     });
-
-    describe("getMatch(matchKey)", function() {
+    
+    describe("get", function() {
+        var original = {
+            "foo": "key1",
+            "bar": {
+                "daft": 3210,
+                "punk": true
+            }
+        };
+        
         before(function() {
-            frcdb.saveMatch({
-                "key": "2015mnmi2_m1",
-                "time": 12345678,
-                "alliances": {
-                    "red": {
-                        "score": 30,
-                        "teams": [
-                            2175,
-                            3130,
-                            1986
-                        ]
-                    },
-                    "blue": {
-                        "score": 40,
-                        "teams": [
-                            111,
-                            1114,
-                            2056
-                        ]
-                    }
-                }
-            });
-        });
-
-        it("should return undefined for unknown matches", function() {
-            assert.isUndefined(frcdb.getMatch("2015mnmi2_notamatch"));
-        });
-        it("should return undefined for degenerate input", function() {
-            assert.isUndefined(frcdb.getMatch(false));
-            assert.isUndefined(frcdb.getMatch([1, 2, 3]));
-        });
-        it("should return a valid match object for a known match", function() {
-            var match = frcdb.getMatch("2015mnmi2_m1");
-            assert.isOk(match);
-            assert.isTrue(strictobject.isValidInstance(match, "match"));
-        });
-
-        after(function() {
-            frcdb.deleteMatch("2015mnmi2_m1");
-        });
-    });
-
-    describe("saveMatch(match)", function() {
-        it("should work for valid matches", function() {
-            var match = {
-                "key": "2015mnmi2_m2",
-                "time": 12345678,
-                "alliances": {
-                    "red": {
-                        "score": 30,
-                        "teams": [
-                            2220,
-                            2052,
-                            254
-                        ]
-                    },
-                    "blue": {
-                        "score": 40,
-                        "teams": [
-                            16,
-                            1816,
-                            2056
-                        ]
-                    }
+            var structure = {
+                "foo": "string",
+                "bar": {
+                    "daft": "number",
+                    "punk": "boolean"
                 }
             };
-            assert.isTrue(frcdb.saveMatch(match));
-        });
-        it("should fail for invalid teams (but not throw exception)", function() {
-            var match = {
-                "key": "2015mnmi2_m3"
-            };
-            assert.isFalse(frcdb.saveMatch(match));
-            assert.doesNotThrow(function() {
-                frcdb.saveMatch(match);
-            });
-        });
-    });
-
-    describe("deleteMatch(matchKey)", function() {
-        before(function() {
-            frcdb.saveMatch({
-                "key": "2015mnmi2_m1",
-                "time": 12345678,
-                "alliances": {
-                    "red": {
-                        "score": 30,
-                        "teams": [
-                            2220,
-                            2052,
-                            254
-                        ]
-                    },
-                    "blue": {
-                        "score": 40,
-                        "teams": [
-                            16,
-                            1816,
-                            2056
-                        ]
-                    }
-                }
-            });
+            jsondb.registerType("jsondbType", structure, "foo");
+            jsondb.save("jsondbType", original);
         });
 
-        it("should return false for unknown matches", function() {
-            assert.isFalse(frcdb.deleteMatch("2015mnmi2_notamatch"));
+        it("should return the correct data", function() {
+            var retrieved = jsondb.get("jsondbType", "key1");
+            assert.equal(JSON.stringify(original), JSON.stringify(retrieved));
         });
-        it("should return true for successful deletion", function() {
-            assert.isTrue(frcdb.deleteMatch("2015mnmi2_m1"));
-            assert.isUndefined(frcdb.getMatch("2015mnmi2_m1"));
+        it("should return a clone of the original object", function() {
+            var retrieved = jsondb.get("jsondbType", "key1");
+            retrieved["foo"] = "keyDifferent";
+            assert.notEqual(original, retrieved);
+            assert.notEqual(JSON.stringify(original), JSON.stringify(retrieved));
+        });
+        it("should throw an error for nonexistent types", function() {
+            assert.throws(function() {
+                jsondb.get("not a real type", "key1");
+            }, "Unrecognized type");
+        });
+        it("should return undefined for nonexistent objects", function() {
+            var retrieved = jsondb.get("jsondbType", "not an actual key");
+            assert.isUndefined(retrieved);
         });
 
         after(function() {
-            frcdb.deleteMatch("2015mnmi2_m1");
+            jsondb.removeAll("jsondbType");
+        });
+    });
+
+    describe("getAll", function() {
+        before(function() {
+            var structure = {"foo": "string"};
+            jsondb.registerType("jsondbType", structure, "foo");
+            jsondb.save("jsondbType", {"foo": "key1"});
+            jsondb.save("jsondbType", {"foo": "key2"});
+        });
+
+        it("should return an object, not an array", function() {
+            var retrieved = jsondb.getAll("jsondbType");
+            assert.isTrue(common.isRealObject(retrieved));
+        });
+        it("should have all data that has been saved", function() {
+            var retrieved = jsondb.getAll("jsondbType");
+            assert.isDefined(retrieved["key1"]);
+            assert.isDefined(retrieved["key2"]);
+        });
+        it("should throw an error for nonexistent types", function() {
+            assert.throws(function() {
+                jsondb.getAll("not a real type");
+            }, "Unrecognized type");
+        });
+        it("should return independent instances of the data", function() {
+            var retrieved1 = jsondb.getAll("jsondbType");
+            var retrieved2 = jsondb.getAll("jsondbType");
+            retrieved1["newkey"] = "wow";
+            assert.notEqual(retrieved1, retrieved2);
+            assert.notEqual(JSON.stringify(retrieved1), JSON.stringify(retrieved2));
+        });
+
+        after(function() {
+            jsondb.removeAll("jsondbType");
+        });
+    });
+
+    describe("save", function() {
+        beforeEach(function() {
+            jsondb.registerType("jsondbType", {"foo": "string"}, "foo");
+        });
+
+        it("should save objects", function() {
+            var obj = {"foo": "hello"};
+            jsondb.save("jsondbType", obj);
+            var retrieved = jsondb.get("jsondbType", "hello");
+            assert.equal(JSON.stringify(obj), JSON.stringify(retrieved));
+        });
+        it("should reject objects whose structure does not match", function() {
+            var obj = {"foo": 3};
+            assert.isFalse(jsondb.save("jsondbType", obj));
+            assert.throws(function() {
+                jsondb.save("jsondbType", obj, true);
+            }, "Object was not a valid instance");
+        });
+        it("should create a new file if none exists", function() {
+            jsondb.save("jsondbType", {"foo": "hello"});
+            var result = false;
+            try {
+                var stats = fs.statSync('jsondb_data/jsondbType.json');
+                if (stats.isFile()) {
+                    result = true;
+                }
+            }
+            catch (e) {
+                result = e;
+            }
+            assert.isTrue(result);
+        });
+
+        afterEach(function() {
+            jsondb.removeAll("jsondbType");
+        });
+    });
+
+    describe("remove", function() {
+        beforeEach(function() {
+            jsondb.registerType("jsondbType", {"foo": "string"}, "foo");
+            jsondb.save("jsondbType", {"foo": "key1"});
+            jsondb.save("jsondbType", {"foo": "key2"});
+        });
+
+        it("should remove items", function() {
+            assert.isDefined(jsondb.get("jsondbType", "key1"));
+            jsondb.remove("jsondbType", "key1");
+            assert.isUndefined(jsondb.get("jsondbType", "key1"));
+        });
+        it("should fail if the key is not present", function() {
+            assert.isFalse(jsondb.remove("jsondbType", "key3"));
+            assert.throws(function() {
+                jsondb.remove("jsondbType", "key3", true);
+            }, "not found");
+        });
+
+        afterEach(function() {
+            jsondb.removeAll("jsondbType");
+        });
+    });
+
+    describe("removeAll", function() {
+        beforeEach(function() {
+            jsondb.registerType("jsondbType", {"foo": "string"}, "foo");
+            jsondb.save("jsondbType", {"foo": "key1"});
+            jsondb.save("jsondbType", {"foo": "key2"});
+        });
+
+        it("should unregister the type", function() {
+            jsondb.removeAll("jsondbType");
+            assert.throws(function() {
+                jsondb.get("jsondbType", "key1");
+            }, "Unrecognized type");
+        });
+        it("should delete the file for that type", function() {
+            jsondb.removeAll("jsondbType");
+            var result = false;
+            try {
+                var stats = fs.statSync('jsondb_data/jsondbType.json');
+            }
+            catch (e) {
+                result = e;
+                if (e.code === 'ENOENT') {
+                    result = true;
+                }
+            }
+            assert.isTrue(result);
         });
     });
 });
