@@ -1,6 +1,5 @@
 var assert = require('chai').assert;
 var strictobject = require('../strictobject.js');
-var frcdb = require('../frcdb.js');
 var jsondb = require('../jsondb.js');
 var common = require('../common.js');
 var fs = require('fs');

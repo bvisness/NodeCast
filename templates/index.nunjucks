@@ -7,7 +7,7 @@
 </head>
 
 <body>
-    <p>Hello, world!</p>
+    <p>{{ content }}</p>
 </body>
 
 </html>

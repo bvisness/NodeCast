@@ -26,7 +26,7 @@ function init(type) {
 
     try {
         var raw = fs.readFileSync(DATA_PATH + "/" + type + ".json");
-        types[type] = JSON.parse(raw);
+        db[type] = JSON.parse(raw);
     } catch (e) {
         if (e.code === 'ENOENT') {
             mkdirp.sync(DATA_PATH);

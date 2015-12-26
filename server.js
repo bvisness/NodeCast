@@ -4,9 +4,13 @@ var PATH_SCSS = "scss/style.scss";
 // Require modules
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
 var nunjucks = require('nunjucks');
 var sass = require('node-sass');
 var fs = require('fs');
+var jsondb = require('./jsondb.js');
+var common = require('./common.js');
+var simpleapi = require('./simpleapi.js');
 
 // Configure Express
 app.use(express.static(PATH_PUBLIC));
@@ -34,10 +38,44 @@ sass.render({
 // Use Nunjucks as template engine
 app.set('view engine', 'nunjucks');
 
-// Routes
-app.get('/', function(req, res) {
-    res.render('index', {
-        'title': 'Index'
+app.use(bodyParser.json()); // for parsing application/json
+
+simpleapi.init(app);
+simpleapi.setBaseUrl("/api");
+simpleapi.registerResource("team", {
+    "number": "number",
+    "name": "string"
+}, "number");
+simpleapi.registerResource("match", {
+    "key": "string",
+    "time": "number",
+    "alliances": {
+        "red": {
+            "score": "number",
+            "teams": "array"
+        },
+        "blue": {
+            "score": "number",
+            "teams": "array"
+        }
+    }
+}, "key");
+
+// Configure error handling
+app.use(function(err, req, res, next) {
+    if (!err.stack) {
+        res.status(500).json({
+            "error": err
+        });
+        return;
+    }
+
+    var errorClass = (/^(.*?):/g).exec(err.stack)[1];
+
+    res.status(500).json({
+        "class": errorClass,
+        "error": err.message,
+        "trace": common.parseStack(err.stack)
     });
 });
 
