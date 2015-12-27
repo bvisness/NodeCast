@@ -64,3 +64,25 @@ function trimString(string, characters) {
     return string.substring(startIndex, endIndex + 1);
 }
 module.exports.trimString = trimString;
+
+function updateObject(original, modifications) {
+    for (var key in modifications) {
+        if (!original.hasOwnProperty(key)) {
+            throw "Key `" + key + "` not found in object"; 
+        }
+
+        if (isRealObject(modifications[key])) {
+            updateObject(original[key], modifications[key]);
+        } else {
+            original[key] = modifications[key];
+        }
+    }
+}
+module.exports.updateObject = updateObject;
+
+function objectWithUpdates(original, modifications) {
+    var clone = cloneObject(original);
+    updateObject(clone, modifications);
+    return clone;
+}
+module.exports.objectWithUpdates = objectWithUpdates;

@@ -4,6 +4,9 @@ var jsondb = require('./jsondb.js');
 var app = undefined;
 var baseUrl = "";
 
+var SINGLETON_KEY = "simpleapi_singleton_primary_key";
+var SINGLETON_KEY_VALUE = "simpleapi_singleton";
+
 //
 // Private functions
 // 
@@ -13,24 +16,58 @@ function checkInit() {
     }
 }
 
-//
-// Public functions
-// 
-function init(_app) {
-    app = _app;
+function routeSingleton(name) {
+    app.get(baseUrl + '/' + name, function(req, res) {
+        var obj = jsondb.get(name, SINGLETON_KEY_VALUE);
+
+        if (!obj) {
+            res.sendStatus(204);
+            return;
+        }
+
+        delete obj[SINGLETON_KEY];
+        res.json(obj);
+    });
+    app.put(baseUrl + '/' + name, function(req, res) {
+        var toSave = req.body;
+        toSave[SINGLETON_KEY] = SINGLETON_KEY_VALUE;
+
+        var saveResult = jsondb.save(name, toSave);
+        if (saveResult) {
+            delete saveResult[SINGLETON_KEY];
+            res.json(saveResult);
+        } else {
+            res.status(400).json({
+                "error": "Failed to save resource of type `" + name + "`. Perhaps the structure did not match the type definition?",
+                "trace": common.parseStack(new Error().stack)
+            });
+        }
+    });
+    app.patch(baseUrl + '/' + name, function(req, res) {
+        var resource = jsondb.get(name, SINGLETON_KEY_VALUE);
+        if (!resource) {
+            res.status(404).json({
+                "error": "Singleton resource for type `" + name + "` not found.",
+                "trace": common.parseStack(new Error().stack)
+            });
+            return;
+        }
+
+        delete req.body[SINGLETON_KEY];
+        common.updateObject(resource, req.body);
+
+        resource[SINGLETON_KEY] = SINGLETON_KEY_VALUE;
+        var saveResult = jsondb.save(name, resource);
+        if (saveResult) {
+            delete saveResult[SINGLETON_KEY];
+            res.json(saveResult);
+        } else {
+            res.sendStatus(400);
+        }
+    });
 }
-module.exports.init = init;
 
-function setBaseUrl(newBase) {
-    baseUrl = "/" + common.trimString(newBase, "/");
-}
-module.exports.setBaseUrl = setBaseUrl;
-
-function registerResource(name, structure, primaryKey) {
-    checkInit();
-
-    jsondb.registerType(name, structure, primaryKey);
-
+function routeMultiple(name, primaryKey) {
     app.get(baseUrl + '/' + name, function(req, res) {
         res.json(jsondb.getAll(name));
     });
@@ -86,22 +123,6 @@ function registerResource(name, structure, primaryKey) {
         }
     });
     app.patch(baseUrl + '/' + name + '/:id', function(req, res) {
-        function updateObject(original, modifications) {
-            for (var key in modifications) {
-                if (!original.hasOwnProperty(key)) {
-                    throw "Key `" + key + "` not found in object"; 
-                }
-
-                if (common.isRealObject(modifications[key])) {
-                    updateObject(original[key], modifications[key]);
-                } else {
-                    original[key] = modifications[key];
-                }
-            }
-
-            return original;
-        }
-
         var id = req.params.id;
 
         var resource = jsondb.get(name, id);
@@ -114,7 +135,7 @@ function registerResource(name, structure, primaryKey) {
         }
 
         delete req.body[primaryKey];
-        resource = updateObject(resource, req.body);
+        common.updateObject(resource, req.body);
 
         var saveResult = jsondb.save(name, resource);
         if (saveResult) {
@@ -135,4 +156,35 @@ function registerResource(name, structure, primaryKey) {
         }
     });
 }
+
+//
+// Public functions
+// 
+function init(_app) {
+    app = _app;
+}
+module.exports.init = init;
+
+function setBaseUrl(newBase) {
+    baseUrl = "/" + common.trimString(newBase, "/");
+}
+module.exports.setBaseUrl = setBaseUrl;
+
+function registerResource(name, structure, primaryKey) {
+    checkInit();
+
+    jsondb.registerType(name, structure, primaryKey);
+
+    routeMultiple(name, primaryKey);
+}
 module.exports.registerResource = registerResource;
+
+function registerSingletonResource(name, structure) {
+    checkInit();
+
+    structure[SINGLETON_KEY] = "string";
+    jsondb.registerType(name, structure, SINGLETON_KEY);
+
+    routeSingleton(name);
+}
+module.exports.registerSingletonResource = registerSingletonResource;

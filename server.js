@@ -42,6 +42,9 @@ app.use(bodyParser.json()); // for parsing application/json
 
 simpleapi.init(app);
 simpleapi.setBaseUrl("/api");
+simpleapi.registerSingletonResource("config", {
+    "event_key": "string"
+});
 simpleapi.registerResource("team", {
     "number": "number",
     "name": "string"
