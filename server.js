@@ -11,6 +11,7 @@ var fs = require('fs');
 var jsondb = require('./jsondb.js');
 var common = require('./common.js');
 var simpleapi = require('./simpleapi.js');
+var routes = require('./routes.js');
 
 // Configure Express
 app.use(express.static(PATH_PUBLIC));
@@ -20,7 +21,8 @@ var templates = process.env.NODE_PATH ? (process.env.NODE_PATH + '/templates') :
 nunjucks.configure(templates, {
     autoescape: true,
     cache: false,
-    express: app
+    express: app,
+    watch: true
 });
 
 // Compile SCSS
@@ -39,6 +41,22 @@ sass.render({
 app.set('view engine', 'nunjucks');
 
 app.use(bodyParser.json()); // for parsing application/json
+app.use(function(req, res, next) { // Dev middleware to recompile SCSS on every page load
+    if (req.method === 'GET') { 
+        sass.render({
+            file: PATH_SCSS,
+            outputStyle: 'compressed'
+        }, function(err, result) {
+            if (err) return console.log(err);
+
+            fs.writeFile(PATH_PUBLIC + "/style.css", result.css, function(err) {
+                if (err) return console.log(err);
+            }); 
+        });
+    }
+
+    next();
+});
 
 simpleapi.init(app);
 simpleapi.setBaseUrl("/api");
@@ -63,6 +81,9 @@ simpleapi.registerResource("match", {
         }
     }
 }, "key");
+
+// Routes
+routes.addWebcastRoutes(app);
 
 // Configure error handling
 app.use(function(err, req, res, next) {

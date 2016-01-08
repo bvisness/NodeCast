@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{{ title }}</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+    
+    <script type="text/javascript" src="/scripts/blueprint.js"></script>
+    <script type="text/javascript" src="/scripts/tbaloader.js"></script>
+</head>
+
+<body class="tbaloader">
+    <div class="mode-select">
+        <div class="mode all"><a>Get all matches</a></div>
+        <p class="or">or</p>
+        <div class="mode single">
+            <span>Get match</span>
+            <input type="text" class="match-key" placeholder="key">
+            <a class="btn go">Go</a>
+            <p class="match-key-info-link"><a>Help?</a></p>
+            <p class="match-key-info">
+                Quals: <em>qmXX</em> (qualification match XX)<br>
+                Quarterfinals: <em>qfXmYY</em> (quarterfinal X match YY)<br>
+                Semifinals: <em>sfXmYY</em> (semifinal X match YY)<br>
+                Finals: <em>fXmYY</em> (final X match YY)
+            </p>
+        </div>
+    </div>
+
+    <div class="match-diffs">
+        <div class="header">
+            <div class="options">
+                <div class="option keep">
+                    <div class="option-tooltip">Keep Local Match</div>
+                </div>
+                <div class="option update">
+                    <div class="option-tooltip">Load From Online</div>
+                </div>
+            </div>
+            <a class="finish">Finish</a>
+        </div>
+        <div class="match-diff-list">
+            <div class="match-diff blueprint">
+                <div class="match original">
+                    <div class="match-key">XX</div>
+                    <div class="match-score">
+                        <span class="score red">XX</span> - <span class="score blue">XX</span>
+                    </div>
+                </div>
+                <div class="options">
+                    <div class="option keep"></div>
+                    <div class="option update"></div>
+                </div>
+                <div class="match new">
+                    <div class="match-key">XX</div>
+                    <div class="match-score">
+                        <span class="score red">XX</span> - <span class="score blue">XX</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,1 +1,322 @@
 @import "normalize";
+
+body {
+    font-family: "Arial Rounded MT Bold", sans-serif;
+}
+
+a {
+    cursor: pointer;
+}
+
+.tbaloader {
+    $loader-width: 800px;
+    $loader-height: 600px;
+
+    & > div {
+        position: absolute;
+        //box-sizing: border-box;
+        width: $loader-width;
+        height: $loader-height;
+        left: 50%;
+        top: 50%;
+        margin-left: -($loader-width / 2);
+        margin-top: -($loader-height / 2);
+
+        border: 1px solid #ddd;
+    }
+
+    .mode-select {
+        padding-top: 190px;
+
+        text-align: center;
+        display: block;
+
+        .mode {
+            font-size: 36px;
+
+            & > * {
+                vertical-align: middle;
+            }
+
+            &.all a {
+                border-bottom: 2px dashed rgba(0, 0, 0, 0.2);
+
+                &:hover {
+                    border-bottom-color: black;
+                }
+            }
+        }
+
+        .or {
+            &::before {
+                content: "- ";
+            }
+            &::after {
+                content: " -";
+            }
+
+            color: #666;
+            margin-top: 30px;
+            margin-bottom: 24px;
+        }
+
+        input {
+            width: 140px;
+            background: none;
+            border: none;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+            outline: none;
+            padding: 2px 0.2em 0;
+        }
+
+        a.go {
+            border: none;
+            background-color: #bbb;
+            color: white;
+            padding: 0.2em;
+            font-size: 0.8em;
+            border-radius: 4px;
+
+            &.active {
+                background-color: #41B741;
+            }
+        }
+
+        .match-key-info, .match-key-info-link {
+            font-size: 16px;
+            color: #8C8C8C;
+            letter-spacing: 0.8px;
+            line-height: 1.6em;
+            display: none;
+
+            em {
+                font-style: normal;
+                color: #666; 
+            }
+        }
+
+        .match-key-info-link {
+            display: block;
+
+            & a:hover {
+                color: #666;
+            }
+        }
+    }
+
+    .match-diffs {
+        $match-diff-header-height: 60px;
+        $options-width: 100px;
+
+        display: none;
+
+        .header {
+            position: absolute;
+            width: 100%;
+            height: $match-diff-header-height;
+            left: 0;
+            top: 0;
+            border-bottom: 1px solid #aaa;
+            background-color: #eee;
+
+            .finish {
+                $finish-button-height: 40px;
+                $finish-button-margin: ($match-diff-header-height - $finish-button-height) / 2;
+
+                box-sizing: border-box;
+                position: absolute;
+                width: 100px;
+                height: $finish-button-height;
+                right: $finish-button-margin;
+                top: $finish-button-margin;
+
+                background-color: #00C500;
+                border-radius: $finish-button-height / 2;
+                color: white;
+                font-size: 20px;
+                padding: 8px;
+                text-align: center;
+            }
+        }
+
+        .match-diff-list {
+            position: absolute;
+            width: 100%;
+            height: $loader-height - $match-diff-header-height;
+            left: 0;
+            top: $match-diff-header-height;
+            overflow-y: scroll;
+        }
+
+        .match-diff {
+            position: relative;
+            height: 60px;
+            border-bottom: 1px solid #aaa;
+        }
+
+        .match {
+            position: absolute;
+            width: ($loader-width - $options-width) / 2;
+            height: 100%;
+            color: #999;
+
+            .match-key, .match-score {
+                position: absolute;
+                font-size: 24px;
+                padding: 5px 15px;
+                top: 12px;
+            }
+
+            &.original {
+                left: 0;
+
+                .match-key {
+                    left: 0;
+                }
+                .match-score {
+                    right: 0;
+                }
+            }
+
+            &.new {
+                right: 0;
+
+                .match-key {
+                    right: 0;
+                }
+                .match-score {
+                    left: 0px;
+                }
+            }
+
+            &.selected {
+                color: black;
+            }
+        }
+
+        .options {
+            box-sizing: border-box;
+            position: absolute;
+            width: $options-width;
+            height: 100%;
+            left: 50%;
+            top: 0;
+            margin-left: -$options-width / 2;
+            border-left: 1px solid #aaa;
+            border-right: 1px solid #aaa;
+        }
+
+        .option {
+            $option-width: 20px;
+            $option-side-margin: ($options-width - (2 * $option-width)) / 3;
+            $option-hover-color: #888;
+            
+            position: absolute;
+            box-sizing: border-box;
+            width: $option-width;
+            height: $option-width;
+            top: 51%;
+            margin-top: -$option-width / 2;
+            border: 1px solid #999;
+            border-radius: 50%;
+            cursor: pointer;
+
+            &:hover {
+                border-color: $option-hover-color;
+
+                &.active::after {
+                    background-color: $option-hover-color;
+                }
+            }
+
+            &:active {
+                background-color: rgba(0, 0, 0, 0.05);
+            }
+
+            &::before {
+                font-family: "FontAwesome";
+                -webkit-font-smoothing: antialiased;
+                
+                position: absolute;
+                bottom: $option-width + 3px;
+                text-align: center;
+                width: 20px;
+                margin-left: -1px;
+            }
+
+            &.active::after {
+                content: '';
+
+                $bullet-width: 8px;
+                position: absolute;
+                width: $bullet-width;
+                height: $bullet-width;
+                margin-left: -$bullet-width / 2;
+                margin-top: -$bullet-width / 2;
+                left: 50%;
+                top: 50%;
+                border-radius: 50%;
+                background-color: #aaa;
+            }
+
+            &.keep {
+                left: $option-side-margin;
+            }
+
+            &.update {
+                right: $option-side-margin;
+            }
+
+            .option-tooltip {
+                $option-tooltip-color: rgba(0, 0, 0, 0.6);
+                $option-tooltip-width: 90px;
+
+                box-sizing: border-box;
+                display: none;
+                position: absolute;
+                width: $option-tooltip-width;
+                left: 50%;
+                top: calc(100% + 8px);
+                margin-left: -$option-tooltip-width / 2;
+
+                background-color: $option-tooltip-color;
+                color: white;
+                font-size: 12px;
+                text-align: center;
+                padding: 4px;
+                border-radius: 3px;
+                z-index: 1;
+
+                &::before {
+                    $option-tooltip-arrow-height: 5px;
+                    content: '';
+                    position: absolute;
+                    width: 0;
+                    height: 0;
+                    top: -$option-tooltip-arrow-height * 2;
+                    left: 50%;
+                    margin-left: -$option-tooltip-arrow-height;
+                    border: $option-tooltip-arrow-height solid;
+                    border-color: transparent;
+                    border-bottom-color: $option-tooltip-color;
+                    display: block;
+                }
+            }
+
+            &:hover .option-tooltip {
+                display: block;
+            }
+        }
+
+        .header .option {
+            top: 66%;
+
+            &.keep::before {
+                content: '\f0c7';
+            }
+            &.update::before {
+                content: '\f0eb';
+            }
+        }
+    }
+}
