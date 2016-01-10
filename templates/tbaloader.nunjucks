@@ -17,7 +17,7 @@
         <p class="or">or</p>
         <div class="mode single">
             <span>Get match</span>
-            <input type="text" class="match-key" placeholder="key">
+            <input type="text" class="match-key" placeholder="key" autofocus>
             <a class="btn go">Go</a>
             <p class="match-key-info-link"><a>Help?</a></p>
             <p class="match-key-info">
@@ -60,6 +60,14 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    
+    <div class="confirmation-wrapper">
+        <div class="confirmation">
+            <p>Matches loaded: <span class="num-loaded">x</span></p>
+            <p>Matches skipped: <span class="num-skipped">x</span></p>
+            <p>Errors: <span class="num-errors">x</span></p>
         </div>
     </div>
 </body>

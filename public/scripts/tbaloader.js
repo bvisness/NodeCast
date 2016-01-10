@@ -144,9 +144,19 @@ function getMatchObject(matchElement) {
 }
 
 function finishLoading() {
+    var loads = 0;
+    var skips = 0;
+    var errors = 0;
+    var numMatchesRemaining = $('.match-diffs .match-diff').length;
+
+    function matchFinished() {
+        numMatchesRemaining--;
+        if (numMatchesRemaining === 0) {
+            showConfirmation(loads, skips, errors);
+        }
+    }
+
     $('.match-diffs .match-diff').each(function(i, matchDiff) {
-        // We do nothing if we decide to keep what we have
-        
         if ($(matchDiff).find('.option.update').hasClass('active')) {
             var newMatchElement = $(matchDiff).find('.match.new');
             var obj = getMatchObject(newMatchElement);
@@ -156,19 +166,31 @@ function finishLoading() {
                 contentType: 'application/json',
                 data: JSON.stringify(obj),
                 success: function() {
+                    loads++;
                     console.log("Successfully saved match " + obj.key);
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
+                    errors++;
                     console.log("Error saving match " + obj.key + "! " + errorThrown);
-                }
+                },
+                complete: matchFinished
             });
+        } else {
+            // We do nothing if we decide to keep what we have
+            skips++;
+            matchFinished();
         }
     });
     showConfirmation();
 }
 
-function showConfirmation() {
+function showConfirmation(loads, skips, errors) {
     $('.match-diffs').hide();
+
+    $('.confirmation-wrapper').show();
+    $('.confirmation').find('.num-loaded').text(loads);
+    $('.confirmation').find('.num-skipped').text(skips);
+    $('.confirmation').find('.num-errors').text(errors);
 }
 
 $(document).ready(function() {

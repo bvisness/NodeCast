@@ -21,8 +21,6 @@ a {
         top: 50%;
         margin-left: -($loader-width / 2);
         margin-top: -($loader-height / 2);
-
-        border: 1px solid #ddd;
     }
 
     .mode-select {
@@ -317,6 +315,25 @@ a {
             &.update::before {
                 content: '\f0eb';
             }
+        }
+    }
+
+    .confirmation-wrapper {
+        display: none;
+
+        .confirmation {
+            box-sizing: border-box;
+            position: absolute;
+            width: 60%;
+            height: 60%;
+            left: 20%;
+            top: 20%;
+
+            background-color: #ccc;
+            padding: 50px;
+            border-radius: 10px;
+            font-size: 24px;
+            text-align: center;
         }
     }
 }
