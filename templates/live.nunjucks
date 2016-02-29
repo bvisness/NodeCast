@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="live">
+    <div class="view live-match">
+        <div class="container">
+            <div class="info-container">
+                <div class="logo left"></div>
+                <div class="info-text match">Qualification 11 of 83</div>
+                <div class="info-text event">North Star Regional</div>
+                <div class="logo right"></div>
+            </div>
+            <div class="match-container">
+                <div class="castle left">
+                    <div class="castle-strength">8</div>
+                </div>
+                <div class="defenses left">
+                    <div class="defense"></div>
+                    <div class="defense"></div>
+                    <div class="defense"></div>
+                    <div class="defense"></div>
+                    <div class="defense"></div>
+                </div>
+                <div class="center-container">
+                    <div class="teams left">
+                        <div class="team">876</div>
+                        <div class="team">2491</div>
+                        <div class="team">4674</div>
+                    </div>
+                    <div class="timer-scores">
+                        <div class="timer">
+                            <div class="timer-fill"></div>
+                            <div class="timer-count">0</div>
+                        </div>
+                        <div class="score left red">0</div>
+                        <div class="score right blue">130</div>
+                    </div>
+                    <div class="teams right">
+                        <div class="team">2169</div>
+                        <div class="team">525</div>
+                        <div class="team">5638</div>
+                    </div>
+                </div>
+                <div class="defenses right">
+                    <div class="defense"></div>
+                    <div class="defense"></div>
+                    <div class="defense"></div>
+                    <div class="defense"></div>
+                    <div class="defense"></div>
+                </div>
+                <div class="castle right">
+                    <div class="castle-strength">8</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="view rankings"></div>
+    <div class="view upcoming"></div>
+</body>
+
+</html>
