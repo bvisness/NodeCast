@@ -1,5 +1,8 @@
 @import "normalize";
 
+$red: #f16567;
+$blue: #7291ca;
+
 body {
     font-family: "Arial Rounded MT Bold", sans-serif;
 }
@@ -543,7 +546,6 @@ a {
                         }
 
                         &.red {
-                            $red: #f16567;
                             background-color: $red;
                             border-color: $red;
 
@@ -553,7 +555,6 @@ a {
                             }
                         }
                         &.blue {
-                            $blue: #7291ca;
                             background-color: $blue;
 
                             &::after {
@@ -573,6 +574,64 @@ a {
                             bottom: 0;
                         }
                     }
+                }
+            }
+
+            .defenses {
+                $defenses-inset: 19%;
+                $defenses-top-padding: 15px;
+                $defense-width: 120px;
+                $defense-height: 18px;
+
+                position: absolute;
+                top: $match-padding + $defenses-top-padding;
+
+                &.left {
+                    left: $defenses-inset;
+                    margin-left: -$defense-width / 2;
+
+                    .defense::after {
+                        left: 0;
+                    }
+                }
+                &.right {
+                    right: $defenses-inset;
+                    margin-right: -$defense-width / 2;
+
+                    .defense::after {
+                        right: 0;
+                    }
+                }
+
+                .defense {
+                    position: relative;
+                    width: $defense-width;
+                    height: $defense-height;
+                    margin-bottom: ($match-content-height - (2 * $defenses-top-padding) - (5 * $defense-height)) / 4;
+                    background-color: #bbb;
+                }
+
+                .defense::after {
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    height: $defense-height;
+                }
+
+                .defense[data-strength="2"]::after {
+                    width: 100%;
+                }
+
+                .defense[data-strength="1"]::after {
+                    width: 50%;
+                }
+
+                &.red .defense::after {
+                    background-color: $red;
+                }
+                &.blue .defense::after {
+                    background-color: $blue;
                 }
             }
         }

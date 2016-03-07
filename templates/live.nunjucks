@@ -19,12 +19,12 @@
                 <div class="castle left">
                     <div class="castle-strength">8</div>
                 </div>
-                <div class="defenses left">
-                    <div class="defense"></div>
-                    <div class="defense"></div>
-                    <div class="defense"></div>
-                    <div class="defense"></div>
-                    <div class="defense"></div>
+                <div class="defenses left red">
+                    <div class="defense" data-strength="2"></div>
+                    <div class="defense" data-strength="2"></div>
+                    <div class="defense" data-strength="1"></div>
+                    <div class="defense" data-strength="2"></div>
+                    <div class="defense" data-strength="0"></div>
                 </div>
                 <div class="center-container">
                     <div class="teams left">
@@ -46,12 +46,12 @@
                         <div class="team">5638</div>
                     </div>
                 </div>
-                <div class="defenses right">
-                    <div class="defense"></div>
-                    <div class="defense"></div>
-                    <div class="defense"></div>
-                    <div class="defense"></div>
-                    <div class="defense"></div>
+                <div class="defenses right blue">
+                    <div class="defense" data-strength="2"></div>
+                    <div class="defense" data-strength="1"></div>
+                    <div class="defense" data-strength="2"></div>
+                    <div class="defense" data-strength="0"></div>
+                    <div class="defense" data-strength="2"></div>
                 </div>
                 <div class="castle right">
                     <div class="castle-strength">8</div>
