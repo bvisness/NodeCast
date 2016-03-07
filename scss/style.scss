@@ -438,7 +438,6 @@ a {
                 .teams {
                     $team-width: 120px;
                     $team-height: 34px;
-                    $team-shadow-width: 5px;
 
                     width: ($center-width - $timer-scores-width) / 2;
                     height: 100%;
@@ -480,20 +479,17 @@ a {
                     &.left .team {
                         margin-left: auto;
                         text-align: right;
-                        border-image: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.15)) 1 100% stretch;
-                        border-width: 0 $team-shadow-width 0 0;
 
                         &::after {
-                            right: $team-width - $team-shadow-width;
+                            right: $team-width;
                             border-left-width: 0;
                         }
                     }
                     &.right .team {
-                        border-image: linear-gradient(to left, transparent, rgba(0, 0, 0, 0.15)) 1 100% stretch;
-                        border-width: 0 0 0 $team-shadow-width;
+                        // No special properties
 
                         &::after {
-                            left: $team-width - $team-shadow-width;
+                            left: $team-width;
                             border-right-width: 0;
                         }
                     }
