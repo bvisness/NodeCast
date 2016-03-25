@@ -16,7 +16,7 @@
                 <div class="logo right"></div>
             </div>
             <div class="match-container">
-                <div class="castle left">
+                <div class="castle left" data-strength="8">
                     <div class="castle-strength">8</div>
                 </div>
                 <div class="defenses left red">
@@ -53,8 +53,8 @@
                     <div class="defense" data-strength="0"></div>
                     <div class="defense" data-strength="2"></div>
                 </div>
-                <div class="castle right">
-                    <div class="castle-strength">8</div>
+                <div class="castle right" data-strength="0">
+                    <div class="castle-strength">0</div>
                 </div>
             </div>
         </div>

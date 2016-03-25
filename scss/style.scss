@@ -630,6 +630,33 @@ a {
                     background-color: $blue;
                 }
             }
+
+            .castle {
+                position: absolute;
+                width: 150px;
+                height: $match-content-height;
+                top: $match-padding;
+                background-image: url('/images/castle.svg');
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position-x: 50%;
+
+                &.left {
+                    left: 75px;
+                }
+                &.right {
+                    right: 75px;
+                }
+
+                .castle-strength {
+                    text-align: center;
+                    font-size: 48px;
+                    padding-top: 60px;
+                }
+                &[data-strength="0"] .castle-strength {
+                    opacity: 0.3;
+                }
+            }
         }
     }
 }
