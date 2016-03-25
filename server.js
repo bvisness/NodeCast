@@ -61,7 +61,9 @@ app.use(function(req, res, next) { // Dev middleware to recompile SCSS on every 
 simpleapi.init(app);
 simpleapi.setBaseUrl("/api");
 simpleapi.registerSingletonResource("config", {
-    "event_key": "string"
+    "event_key": "string",
+    "event_name": "string",
+    "is_red_left": "boolean"
 });
 simpleapi.registerResource("team", {
     "number": "number",

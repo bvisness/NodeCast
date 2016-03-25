@@ -4,6 +4,8 @@
 <head>
     <title>{{ title }}</title>
     <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="/scripts/jquery-1.12.2.min.js"></script>
+    <script type="text/javascript" src="/scripts/live.js"></script>
 </head>
 
 <body class="live">
@@ -11,50 +13,50 @@
         <div class="container">
             <div class="info-container">
                 <div class="logo left"></div>
-                <div class="info-text match">Qualification 11 of 83</div>
-                <div class="info-text event">North Star Regional</div>
+                <div class="info-text match">Qualification XX of XX</div>
+                <div class="info-text event">Event Name</div>
                 <div class="logo right"></div>
             </div>
             <div class="match-container">
                 <div class="castle left" data-strength="8">
                     <div class="castle-strength">8</div>
                 </div>
-                <div class="defenses left red">
+                <div class="defenses left alliance-color">
                     <div class="defense" data-strength="2"></div>
                     <div class="defense" data-strength="2"></div>
-                    <div class="defense" data-strength="1"></div>
                     <div class="defense" data-strength="2"></div>
-                    <div class="defense" data-strength="0"></div>
+                    <div class="defense" data-strength="2"></div>
+                    <div class="defense" data-strength="2"></div>
                 </div>
                 <div class="center-container">
                     <div class="teams left">
-                        <div class="team">876</div>
-                        <div class="team">2491</div>
-                        <div class="team">4674</div>
+                        <div class="team"></div>
+                        <div class="team"></div>
+                        <div class="team"></div>
                     </div>
                     <div class="timer-scores">
                         <div class="timer">
                             <div class="timer-fill"></div>
                             <div class="timer-count">0</div>
                         </div>
-                        <div class="score left red">0</div>
-                        <div class="score right blue">130</div>
+                        <div class="score left alliance-color">0</div>
+                        <div class="score right alliance-color">0</div>
                     </div>
                     <div class="teams right">
-                        <div class="team">2169</div>
-                        <div class="team">525</div>
-                        <div class="team">5638</div>
+                        <div class="team"></div>
+                        <div class="team"></div>
+                        <div class="team"></div>
                     </div>
                 </div>
-                <div class="defenses right blue">
+                <div class="defenses right alliance-color">
                     <div class="defense" data-strength="2"></div>
-                    <div class="defense" data-strength="1"></div>
                     <div class="defense" data-strength="2"></div>
-                    <div class="defense" data-strength="0"></div>
+                    <div class="defense" data-strength="2"></div>
+                    <div class="defense" data-strength="2"></div>
                     <div class="defense" data-strength="2"></div>
                 </div>
-                <div class="castle right" data-strength="0">
-                    <div class="castle-strength">0</div>
+                <div class="castle right" data-strength="8">
+                    <div class="castle-strength">8</div>
                 </div>
             </div>
         </div>
