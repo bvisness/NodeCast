@@ -39,6 +39,16 @@ function setBlueScore(score) {
     $('.score.blue').text(score);
 }
 
+function setRedTowerStrength(strength) {
+    $('.castle.red').attr('data-strength', Math.max(strength, 0));
+    $('.castle.red .castle-strength').text(strength);
+}
+
+function setBlueTowerStrength(strength) {
+    $('.castle.blue').attr('data-strength', Math.max(strength, 0));
+    $('.castle.blue .castle-strength').text(strength);
+}
+
 function resetMatch() {
     setRedScore(0);
     setBlueScore(0);
