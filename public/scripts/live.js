@@ -52,6 +52,8 @@ function setBlueTowerStrength(strength) {
 function resetMatch() {
     setRedScore(0);
     setBlueScore(0);
+    setRedTowerStrength(config['max_tower_strength']);
+    setBlueTowerStrength(config['max_tower_strength']);
 }
 
 function getConfig(callback = function(){}) {
@@ -116,6 +118,7 @@ $(document).ready(function() {
     getConfig(function() {
         setLeftRightColors(config['is_red_left'], config['flip_score_colors']);
         setEventName(config['event_name']);
+        resetMatch();
     });
     setInterval(updateTimer, 50);
 });
