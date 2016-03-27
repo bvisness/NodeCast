@@ -17,9 +17,14 @@ var config;
 var matchRunning;
 var matchStartTime;
 
-function setLeftRightColors(isRedLeft) {
+function setLeftRightColors(isRedLeft, flipScoreColors) {
     var leftColor = isRedLeft ? 'red' : 'blue';
     var rightColor = isRedLeft ? 'blue' : 'red';
+
+    if (flipScoreColors) {
+        $('.alliance-color.score.left').removeClass('alliance-color').addClass(rightColor);
+        $('.alliance-color.score.right').removeClass('alliance-color').addClass(leftColor);
+    }
 
     $('.alliance-color.left').removeClass('alliance-color').addClass(leftColor);
     $('.alliance-color.right').removeClass('alliance-color').addClass(rightColor);
@@ -100,7 +105,7 @@ function updateTimer() {
 
 $(document).ready(function() {
     getConfig(function() {
-        setLeftRightColors(config['is_red_left']);
+        setLeftRightColors(config['is_red_left'], config['flip_score_colors']);
         setEventName(config['event_name']);
     });
     setInterval(updateTimer, 50);

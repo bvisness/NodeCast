@@ -63,7 +63,8 @@ simpleapi.setBaseUrl("/api");
 simpleapi.registerSingletonResource("config", {
     "event_key": "string",
     "event_name": "string",
-    "is_red_left": "boolean"
+    "is_red_left": "boolean",
+    "flip_score_colors": "boolean"
 });
 simpleapi.registerResource("team", {
     "number": "number",
