@@ -11,8 +11,8 @@ var WARNING_LENGTH = 30;
 
 var MATCH_LENGTH = AUTO_LENGTH + TELEOP_LENGTH;
 
-var config;
-var matchState;
+var config = {};
+var matchState = {};
 
 function setLeftRightColors(isRedLeft, flipScoreColors) {
     var leftColor = isRedLeft ? 'red' : 'blue';
