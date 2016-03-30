@@ -2,6 +2,11 @@
   "name": "node-cast",
   "version": "0.0.0",
   "description": "A fancy, Node-based system for FRC webcast overlays.",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/bvisness/NodeCast.git"
+  },
+  "license": "MIT",
   "dependencies": {
     "body-parser": "^1.14.1",
     "express": "4.x.x",
