@@ -9,4 +9,9 @@ module.exports.addWebcastRoutes = function(app) {
             'title': 'Load from The Blue Alliance'
         });
     });
+    app.get('/cplive', function(req, res) {
+        res.render('cp_live', {
+            'title': 'Live Control Panel'
+        });
+    });
 }

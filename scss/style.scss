@@ -684,3 +684,34 @@ a {
         }
     }
 }
+
+.cp-live {
+    .scores {
+        width: 500px;
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+
+        .score {
+            width: 50%;
+            height: 150px;
+            position: absolute;
+            text-align: center;
+            font-size: 80px;
+            border: 0;
+
+            &.left {
+                left: 0;
+            }
+            &.right {
+                right: 0;
+            }
+            &.red {
+                background-color: $red;
+            }
+            &.blue {
+                background-color: $blue;
+            }
+        }
+    }
+}

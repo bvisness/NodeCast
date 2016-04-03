@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="/scripts/jquery-1.12.2.min.js"></script>
+    <script type="text/javascript" src="/scripts/config.js"></script>
+    <script type="text/javascript" src="/scripts/websocket.js"></script>
+    <script type="text/javascript" src="/scripts/cp_live.js"></script>
+</head>
+
+<body class="cp-live">
+    <div class="castle left alliance-color" data-strength="8">
+        <div class="castle-strength">8</div>
+    </div>
+    <div class="defenses left alliance-color">
+        <div class="defense" data-strength="2"></div>
+        <div class="defense" data-strength="2"></div>
+        <div class="defense" data-strength="2"></div>
+        <div class="defense" data-strength="2"></div>
+        <div class="defense" data-strength="2"></div>
+    </div>
+    <div class="teams left">
+        <div class="team"></div>
+        <div class="team"></div>
+        <div class="team"></div>
+    </div>
+    <div class="timer">
+        <div class="timer-fill"></div>
+        <div class="timer-count">0</div>
+    </div>
+    <div class="scores">
+        <input class="score left alliance-color" value="0"></input>
+        <input class="score right alliance-color" value="0"></input>
+    </div>
+    <div class="teams right">
+        <div class="team"></div>
+        <div class="team"></div>
+        <div class="team"></div>
+    </div>
+    <div class="defenses right alliance-color">
+        <div class="defense" data-strength="2"></div>
+        <div class="defense" data-strength="2"></div>
+        <div class="defense" data-strength="2"></div>
+        <div class="defense" data-strength="2"></div>
+        <div class="defense" data-strength="2"></div>
+    </div>
+    <div class="castle right alliance-color" data-strength="8">
+        <div class="castle-strength">8</div>
+    </div>
+</body>
+
+</html>

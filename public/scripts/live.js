@@ -11,10 +11,7 @@ var WARNING_LENGTH = 30;
 
 var MATCH_LENGTH = AUTO_LENGTH + TELEOP_LENGTH;
 
-var config = {};
 var matchState = {};
-
-var ws;
 
 function setLeftRightColors(isRedLeft, flipScoreColors) {
     var leftColor = isRedLeft ? 'red' : 'blue';
@@ -56,17 +53,6 @@ function resetMatch() {
     setBlueScore(0);
     setRedTowerStrength(config['max_tower_strength']);
     setBlueTowerStrength(config['max_tower_strength']);
-}
-
-function getConfig(callback = function(){}) {
-    $.ajax({
-        method: 'GET',
-        url: '/api/config',
-        success: function(data) {
-            config = data;
-            callback();
-        }
-    });
 }
 
 function updateTimer() {
@@ -116,25 +102,14 @@ function updateTimer() {
     }
 }
 
-function initWebSockets() {
-    ws = new WebSocket('ws://localhost:8081', 'echo-protocol');
-    ws.addEventListener("message", function(e) {
-        console.log(e.data);
-    });
-}
-
-function sendWebSocketMessage(msg) {
-    if (!ws || ws.readyState != 1) {
-        initWebSockets();
+function handleMessage(e) {
+    var msg = JSON.parse(e.data);
+    console.log(msg);
+    if (msg.type == 'match_update') {
+        var matchState = msg.match_state;
+        setRedScore(matchState.scores.red);
+        setBlueScore(matchState.scores.blue);
     }
-    if (ws.readyState != 1) {
-        ws.onopen = function() {
-            sendWebSocketMessage(msg);
-        }
-        return;
-    }
-
-    ws.send(msg);
 }
 
 $(document).ready(function() {
@@ -145,5 +120,6 @@ $(document).ready(function() {
     });
     setInterval(updateTimer, 50);
 
+    addWebSocketMessageListener(handleMessage);
     sendWebSocketMessage('{"message_type": "register", "client_type": "live"}');
 });

@@ -44,6 +44,7 @@ module.exports.init = function(httpServer) {
 // 
 
 function handleMessage(client, message) {
+    console.log('Received message with data `' + message.utf8Data + '`');
     try {
         var parsed = JSON.parse(message.utf8Data);
     } catch (e) {
@@ -69,6 +70,7 @@ function handleMessage(client, message) {
     }
 
     if (client == controlPanelClient) {
+        console.log('Relaying message to live client');
         liveClient.sendUTF(message.utf8Data);
     }
 }

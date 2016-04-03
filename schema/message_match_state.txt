@@ -1,0 +1,27 @@
+{
+    "type": "match_update",
+    "match_state": {
+        "info": {
+            "match_key": string,
+            "teams": {
+                "red": array,
+                "blue": array
+            }
+        },
+        "period": "inactive" | "autonomous" | "teleop" | "canceled",
+        "start_time": number,
+        "teleop_time": number,
+        "scores": {
+            "red": num,
+            "blue": num
+        },
+        "defense_strengths": {
+            "red": array,
+            "blue": array
+        },
+        "tower_strengths": {
+            "red": number,
+            "blue": number
+        }
+    }
+}
