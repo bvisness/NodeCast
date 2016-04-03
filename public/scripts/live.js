@@ -14,6 +14,8 @@ var MATCH_LENGTH = AUTO_LENGTH + TELEOP_LENGTH;
 var config = {};
 var matchState = {};
 
+var ws;
+
 function setLeftRightColors(isRedLeft, flipScoreColors) {
     var leftColor = isRedLeft ? 'red' : 'blue';
     var rightColor = isRedLeft ? 'blue' : 'red';
@@ -114,6 +116,27 @@ function updateTimer() {
     }
 }
 
+function initWebSockets() {
+    ws = new WebSocket('ws://localhost:8081', 'echo-protocol');
+    ws.addEventListener("message", function(e) {
+        console.log(e.data);
+    });
+}
+
+function sendWebSocketMessage(msg) {
+    if (!ws || ws.readyState != 1) {
+        initWebSockets();
+    }
+    if (ws.readyState != 1) {
+        ws.onopen = function() {
+            sendWebSocketMessage(msg);
+        }
+        return;
+    }
+
+    ws.send(msg);
+}
+
 $(document).ready(function() {
     getConfig(function() {
         setLeftRightColors(config['is_red_left'], config['flip_score_colors']);
@@ -121,4 +144,6 @@ $(document).ready(function() {
         resetMatch();
     });
     setInterval(updateTimer, 50);
+
+    sendWebSocketMessage('{"message_type": "register", "client_type": "live"}');
 });

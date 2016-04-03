@@ -12,6 +12,7 @@ var jsondb = require('./jsondb.js');
 var common = require('./common.js');
 var simpleapi = require('./simpleapi.js');
 var routes = require('./routes.js');
+var websocket_server = require('./websocket_server.js');
 
 // Configure Express
 app.use(express.static(PATH_PUBLIC));
@@ -114,3 +115,6 @@ var server = app.listen(8081, function() {
 
     console.log("Server listening on port %s", port);
 });
+
+// Start websocket server
+websocket_server.init(server);
