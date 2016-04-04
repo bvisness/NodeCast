@@ -21,23 +21,28 @@
         <div class="defense" data-strength="2"></div>
         <div class="defense" data-strength="2"></div>
     </div>
-    <div class="teams left">
-        <div class="team"></div>
-        <div class="team"></div>
-        <div class="team"></div>
-    </div>
+    
     <div class="timer">
         <div class="timer-fill"></div>
         <div class="timer-count">0</div>
     </div>
-    <div class="scores">
-        <input class="score left alliance-color" value="0"></input>
-        <input class="score right alliance-color" value="0"></input>
-    </div>
-    <div class="teams right">
-        <div class="team"></div>
-        <div class="team"></div>
-        <div class="team"></div>
+    <div class="center-container">
+        <div class="scores">
+            <input class="score left alliance-color" value="0"></input>
+            <input class="score right alliance-color" value="0"></input>
+        </div>
+        <div class="teams-container">
+            <div class="teams left alliance-color">
+                <input class="team"></input>
+                <input class="team"></input>
+                <input class="team"></input>
+            </div>
+            <div class="teams right alliance-color">
+                <input class="team"></input>
+                <input class="team"></input>
+                <input class="team"></input>
+            </div>
+        </div>
     </div>
     <div class="defenses right alliance-color">
         <div class="defense" data-strength="2"></div>

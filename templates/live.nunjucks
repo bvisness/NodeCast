@@ -31,7 +31,7 @@
                     <div class="defense" data-strength="2"></div>
                 </div>
                 <div class="center-container">
-                    <div class="teams left">
+                    <div class="teams left alliance-color">
                         <div class="team"></div>
                         <div class="team"></div>
                         <div class="team"></div>
@@ -44,7 +44,7 @@
                         <div class="score left alliance-color">0</div>
                         <div class="score right alliance-color">0</div>
                     </div>
-                    <div class="teams right">
+                    <div class="teams right alliance-color">
                         <div class="team"></div>
                         <div class="team"></div>
                         <div class="team"></div>

@@ -20,6 +20,8 @@ function setLeftRightColors(isRedLeft, flipScoreColors) {
     if (flipScoreColors) {
         $('.alliance-color.score.left').removeClass('alliance-color').addClass(rightColor);
         $('.alliance-color.score.right').removeClass('alliance-color').addClass(leftColor);
+        $('.alliance-color.teams.left').removeClass('alliance-color').addClass(rightColor);
+        $('.alliance-color.teams.right').removeClass('alliance-color').addClass(leftColor);
     }
 
     $('.alliance-color.left').removeClass('alliance-color').addClass(leftColor);
@@ -46,6 +48,18 @@ function setRedTowerStrength(strength) {
 function setBlueTowerStrength(strength) {
     $('.castle.blue').attr('data-strength', Math.max(strength, 0));
     $('.castle.blue .castle-strength').text(strength);
+}
+
+function setRedTeams(teams) {
+    for (var i = 0; i < 3; i++) {
+        $('.teams.red .team').eq(i).text(teams[i]);
+    }
+}
+
+function setBlueTeams(teams) {
+    for (var i = 0; i < 3; i++) {
+        $('.teams.blue .team').eq(i).text(teams[i]);
+    }
 }
 
 function resetMatch() {
@@ -109,6 +123,8 @@ function handleMessage(e) {
         var matchState = msg.match_state;
         setRedScore(matchState.scores.red);
         setBlueScore(matchState.scores.blue);
+        setRedTeams(matchState.info.teams.red);
+        setBlueTeams(matchState.info.teams.blue);
     }
 }
 
