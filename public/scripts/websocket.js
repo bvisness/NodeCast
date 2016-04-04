@@ -28,3 +28,9 @@ function addWebSocketMessageListener(func) {
     }
     wsMessageListenerFunctions.push(func);
 }
+
+function ensureWebSocketConnection() {
+    if (!ws || ws.readyState != 1) {
+        initWebSockets();
+    }
+}

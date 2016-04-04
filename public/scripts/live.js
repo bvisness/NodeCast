@@ -135,6 +135,7 @@ $(document).ready(function() {
         resetMatch();
     });
     setInterval(updateTimer, 50);
+    setInterval(ensureWebSocketConnection, 10000);
 
     addWebSocketMessageListener(handleMessage);
     sendWebSocketMessage('{"message_type": "register", "client_type": "live"}');
