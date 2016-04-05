@@ -138,6 +138,11 @@ $(document).ready(function() {
             return;
         }
 
+        // Make it easy to refresh the page
+        if (e.keyCode == 17 || e.keyCode == 91 || e.keyCode == 82) {
+            return;
+        }
+
         // Configure "easy" keypresses
         e.preventDefault();
         switch (e.keyCode) {
