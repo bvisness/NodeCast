@@ -86,11 +86,28 @@ function sendMatchState() {
     sendWebSocketMessage(JSON.stringify(msgObject));
 }
 
+function addKeyHelpers() {
+    for (var i = 0; i < 5; i++) {
+        var redDefenseDownBtn = $('.defenses.red .defense-down-btn').eq(i);
+        var redDefenseUpBtn = $('.defenses.red .defense-up-btn').eq(i);
+        var blueDefenseDownBtn = $('.defenses.blue .defense-down-btn').eq(i);
+        var blueDefenseUpBtn = $('.defenses.blue .defense-up-btn').eq(i);
+
+        $(redDefenseDownBtn).attr('data-content', keyboardMap[KEYS_RED_DEFENSES_DOWN[i]]);
+        $(redDefenseUpBtn).attr('data-content', keyboardMap[KEYS_RED_DEFENSES_UP[i]]);
+        $(blueDefenseDownBtn).attr('data-content', keyboardMap[KEYS_BLUE_DEFENSES_DOWN[i]]);
+        $(blueDefenseUpBtn).attr('data-content', keyboardMap[KEYS_BLUE_DEFENSES_UP[i]]);
+    }
+}
+
 $(document).ready(function() {
+    addKeyHelpers();
+
     getConfig(function() {
         // Config code here
     });
 
+    // Configure editing of inputs in general
     $('input').on('mousedown', function(e) {
         e.preventDefault();
         editInput(this);
@@ -100,10 +117,12 @@ $(document).ready(function() {
         }
     });
 
+    // Configure validation of numeric inputs
     $('.score, .team').on('blur', function(e) {
         validateNumericInput(this);
     });
 
+    // Configure defense up/down buttons
     $('.defense-down-btn').on('click', function(e) {
         var defense = $(this).siblings('.defense');
         defenseStrengthDown(defense);
@@ -113,11 +132,13 @@ $(document).ready(function() {
         defenseStrengthUp(defense);
     });
 
+    // Configure keypresses
     $(document).on('keydown', function(e) {
         if ($(':focus').length > 0) {
             return;
         }
 
+        // Configure "easy" keypresses
         e.preventDefault();
         switch (e.keyCode) {
         case KEY_EDIT_RED_SCORE:
@@ -128,6 +149,7 @@ $(document).ready(function() {
             break;
         }
 
+        // Configure defense up/down keypresses
         var keyIndex;
         if ((keyIndex = KEYS_RED_DEFENSES_DOWN.indexOf(e.keyCode)) !== -1) {
             var defense = $('.defenses.red .defense').eq(keyIndex);

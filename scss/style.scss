@@ -797,6 +797,7 @@ a {
         }
         .defense-btn {
             display: inline-block;
+            width: 18px;
             background-color: white;
             padding: 0 7px;
             margin: 0 8px;
@@ -805,6 +806,17 @@ a {
             color: #666;
             font-size: 14px;
             cursor: pointer;
+        }
+        .defense-down-btn::before, .defense-up-btn::after {
+            content: attr(data-content);
+            font-size: 0.8em;
+            color: #aaa;
+        }
+        .defense-down-btn::before {
+            margin-right: 4px;
+        }
+        .defense-up-btn::after {
+            margin-left: 4px;
         }
         .defense {
             position: relative;
