@@ -687,6 +687,7 @@ a {
 
 .cp-live {
     background-color: #ddd;
+    padding-top: 60px;
 
     .center-container {
         width: 1000px;
@@ -694,6 +695,18 @@ a {
         margin-left: auto;
         margin-right: auto;
         position: relative;
+    }
+
+    .timer {
+        overflow: hidden;
+        width: 50%;
+        height: 30px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: #bbb;
+        font-size: 22px;
+        line-height: 30px;
+        text-align: center;
     }
 
     .scores {

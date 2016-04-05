@@ -12,10 +12,7 @@
 
 <body class="cp-live">
     <div class="center-container">
-        <div class="timer">
-            <div class="timer-fill"></div>
-            <div class="timer-count">0</div>
-        </div>
+        <div class="timer"></div>
         <div class="scores">
             <input class="score left red" value="0"></input>
             <input class="score right blue" value="0"></input>
