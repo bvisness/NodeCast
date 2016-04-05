@@ -97,10 +97,10 @@ $(document).ready(function() {
         e.preventDefault();
         switch (e.keyCode) {
         case KEY_EDIT_RED_SCORE:
-            editScoreInput($('.score.red'));
+            editInput($('.score.red'));
             break;
         case KEY_EDIT_BLUE_SCORE:
-            editScoreInput($('.score.blue'));
+            editInput($('.score.blue'));
             break;
         }
     });
