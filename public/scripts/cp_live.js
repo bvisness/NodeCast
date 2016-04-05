@@ -9,7 +9,9 @@ var KEY_RED_CASTLE_UP = 87; // w
 var KEY_BLUE_CASTLE_DOWN = 79; // o
 var KEY_BLUE_CASTLE_UP = 80; // p
 
-var active_keys;
+var matchPeriod;
+var autoStartTime;
+var teleopStartTime;
 
 function editInput(element) {
     if ($(element).is(':focus')) {
@@ -94,9 +96,9 @@ function sendMatchState() {
                     ]
                 }
             },
-            'period': 'inactive',
-            'start_time': 0,
-            'teleop_time': 0,
+            'period': matchPeriod,
+            'start_time': autoStartTime,
+            'teleop_time': teleopStartTime,
             'scores': {
                 'red': $('.score.red').val(),
                 'blue': $('.score.blue').val()
@@ -182,6 +184,26 @@ $(document).ready(function() {
     // Configure match key input
     $('.match-key').on('blur', function(e) {
         validateMatchKey($(this).val());
+    });
+
+    // Configure timer buttons
+    $('.start-auto').on('click', function(e) {
+        matchPeriod = 'autonomous';
+        autoStartTime = Date.now();
+        sendMatchState();
+    });
+    $('.start-teleop').on('click', function(e) {
+        matchPeriod = 'teleop';
+        teleopStartTime = Date.now();
+        sendMatchState();
+    });
+    $('.cancel-match').on('click', function(e) {
+        matchPeriod = 'canceled';
+        sendMatchState();
+    });
+    $('.reset-match').on('click', function(e) {
+        matchPeriod = 'inactive';
+        sendMatchState();
     });
 
     // Configure keypresses

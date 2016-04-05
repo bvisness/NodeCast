@@ -17,6 +17,12 @@
             <div class="match-info">
                 <input class="match-key" placeholder="Match Key">
             </div>
+            <div class="time-buttons">
+                <div class="time-button start-auto">Start Auto</div>
+                <div class="time-button start-teleop">Start Teleop</div>
+                <div class="time-button cancel-match">Abort Match</div>
+                <div class="time-button reset-match">Reset</div>
+            </div>
             <div class="timer"></div>
             <div class="scores">
                 <input class="score left red" value="0">

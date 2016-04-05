@@ -119,6 +119,12 @@ function updateTimer() {
         return;
     }
 
+    // Stop in our tracks if canceled
+    if (matchState['period'] == 'canceled') {
+        $('.timer-fill').addClass('red');
+        return;
+    }
+
     // Update timer count
     var secondsFromAuto = Math.floor((Date.now() - parseInt(matchState['start_time'])) / 1000);
     var secondsFromTeleop = Math.floor((Date.now() - parseInt(matchState['teleop_time'])) / 1000);
@@ -161,7 +167,7 @@ function handleMessage(e) {
     var msg = JSON.parse(e.data);
     console.log(msg);
     if (msg.type == 'match_update') {
-        var matchState = msg.match_state;
+        matchState = msg.match_state;
         setRedScore(matchState.scores.red);
         setBlueScore(matchState.scores.blue);
         setRedTeams(matchState.info.teams.red);
