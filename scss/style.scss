@@ -876,6 +876,8 @@ a {
             position: absolute;
             top: 50%;
             width: 18px;
+            height: 30px;
+            line-height: 30px;
             background-color: white;
             padding: 0 7px;
             border: 1px solid #ccc;
@@ -889,6 +891,17 @@ a {
         }
         .castle-up-btn {
             right: 0;
+        }
+        .castle-down-btn::before, .castle-up-btn::after {
+            content: attr(data-content);
+            font-size: 0.8em;
+            color: #aaa;
+        }
+        .castle-down-btn::before {
+            margin-right: 4px;
+        }
+        .castle-up-btn::after {
+            margin-left: 4px;
         }
     }
 }

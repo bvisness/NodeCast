@@ -4,6 +4,10 @@ var KEYS_RED_DEFENSES_DOWN = [90, 88, 67, 86, 66]; // z, x, c, v, b
 var KEYS_RED_DEFENSES_UP = [65, 83, 68, 70, 71]; // a, s, d, f, g
 var KEYS_BLUE_DEFENSES_DOWN = [78, 77, 188, 190, 191]; // n, m, ,, ., /
 var KEYS_BLUE_DEFENSES_UP = [74, 75, 76, 186, 222]; // j, k, l, ;, '
+var KEY_RED_CASTLE_DOWN = 81; // q
+var KEY_RED_CASTLE_UP = 87; // w
+var KEY_BLUE_CASTLE_DOWN = 79; // o
+var KEY_BLUE_CASTLE_UP = 80; // p
 
 var active_keys;
 
@@ -102,17 +106,26 @@ function sendMatchState() {
 }
 
 function addKeyHelpers() {
+    function setContentFromKeyCode(element, code) {
+        $(element).attr('data-content', keyboardMap[code]);
+    }
+
     for (var i = 0; i < 5; i++) {
         var redDefenseDownBtn = $('.defenses.red .defense-down-btn').eq(i);
         var redDefenseUpBtn = $('.defenses.red .defense-up-btn').eq(i);
         var blueDefenseDownBtn = $('.defenses.blue .defense-down-btn').eq(i);
         var blueDefenseUpBtn = $('.defenses.blue .defense-up-btn').eq(i);
 
-        $(redDefenseDownBtn).attr('data-content', keyboardMap[KEYS_RED_DEFENSES_DOWN[i]]);
-        $(redDefenseUpBtn).attr('data-content', keyboardMap[KEYS_RED_DEFENSES_UP[i]]);
-        $(blueDefenseDownBtn).attr('data-content', keyboardMap[KEYS_BLUE_DEFENSES_DOWN[i]]);
-        $(blueDefenseUpBtn).attr('data-content', keyboardMap[KEYS_BLUE_DEFENSES_UP[i]]);
+        setContentFromKeyCode(redDefenseDownBtn, KEYS_RED_DEFENSES_DOWN[i]);
+        setContentFromKeyCode(redDefenseUpBtn, KEYS_RED_DEFENSES_UP[i]);
+        setContentFromKeyCode(blueDefenseDownBtn, KEYS_BLUE_DEFENSES_DOWN[i]);
+        setContentFromKeyCode(blueDefenseUpBtn, KEYS_BLUE_DEFENSES_UP[i]);
     }
+
+    setContentFromKeyCode($('.castle.red .castle-down-btn'), KEY_RED_CASTLE_DOWN);
+    setContentFromKeyCode($('.castle.red .castle-up-btn'), KEY_RED_CASTLE_UP);
+    setContentFromKeyCode($('.castle.blue .castle-down-btn'), KEY_BLUE_CASTLE_DOWN);
+    setContentFromKeyCode($('.castle.blue .castle-up-btn'), KEY_BLUE_CASTLE_UP);
 }
 
 $(document).ready(function() {
@@ -176,6 +189,18 @@ $(document).ready(function() {
             break;
         case KEY_EDIT_BLUE_SCORE:
             editInput($('.score.blue'));
+            break;
+        case KEY_RED_CASTLE_DOWN:
+            castleStrengthDown($('.castle.red'));
+            break;
+        case KEY_RED_CASTLE_UP:
+            castleStrengthUp($('.castle.red'));
+            break;
+        case KEY_BLUE_CASTLE_DOWN:
+            castleStrengthDown($('.castle.blue'));
+            break;
+        case KEY_BLUE_CASTLE_UP:
+            castleStrengthUp($('.castle.blue'));
             break;
         }
 
