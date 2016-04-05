@@ -686,16 +686,21 @@ a {
 }
 
 .cp-live {
+    background-color: #ddd;
+
     .center-container {
-        width: 500px;
+        width: 1000px;
+        height: 100%;
         margin-left: auto;
         margin-right: auto;
+        position: relative;
     }
 
     .scores {
-        width: 100%;
+        width: 50%;
         height: 150px;
-        position: relative;
+        position: absolute;
+        left: 25%;
 
         .score {
             width: 50%;
@@ -704,13 +709,8 @@ a {
             font-size: 80px;
             border: 0;
             padding: 0;
+            float: left;
 
-            &.left {
-                float: left;
-            }
-            &.right {
-                float: right;
-            }
             &.red {
                 background-color: $red;
             }
@@ -720,23 +720,29 @@ a {
         }
     }
 
-    .teams-container {
-        width: 100%;
+    .teams {
+        width: 25%;
+        position: absolute;
 
-        .teams {
-            width: 50%;
+        &.left {
+            left: 0;
+            text-align: right;
+        }
+        &.right {
+            right: 0;
+        }
 
-            &.left {
-                float: left;
-            }
-            &.right {
-                float: right;
-            }
+        .team {
+            width: 100px;
+            height: 20px;
+            padding: 3px 20px;
+            margin-bottom: 8px;
+            font-size: 24px;
+            background-color: white;
+            position: relative;
 
-            .team {
-                display: block;
-                margin-left: auto;
-                margin-right: auto;
+            &:first-of-type {
+                margin-top: 8px;
             }
         }
     }
