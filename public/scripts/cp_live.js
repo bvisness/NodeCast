@@ -3,26 +3,11 @@ var KEY_EDIT_BLUE_SCORE = 66; // b
 
 var active_keys;
 
-function setLeftRightColors(isRedLeft, flipScoreColors) {
-    var leftColor = isRedLeft ? 'red' : 'blue';
-    var rightColor = isRedLeft ? 'blue' : 'red';
-
-    if (flipScoreColors) {
-        $('.alliance-color.score.left').removeClass('alliance-color').addClass(rightColor);
-        $('.alliance-color.score.right').removeClass('alliance-color').addClass(leftColor);
-        $('.alliance-color.teams.left').removeClass('alliance-color').addClass(rightColor);
-        $('.alliance-color.teams.right').removeClass('alliance-color').addClass(leftColor);
-    }
-
-    $('.alliance-color.left').removeClass('alliance-color').addClass(leftColor);
-    $('.alliance-color.right').removeClass('alliance-color').addClass(rightColor);
-}
-
 function editInput(element) {
     if ($(element).is(':focus')) {
         return;
     }
-    
+
     $(element).attr('data-prev-value', $(element).val());
     $(element).val('').focus();
 }
@@ -77,7 +62,7 @@ function sendMatchState() {
 
 $(document).ready(function() {
     getConfig(function() {
-        setLeftRightColors(config['is_red_left'], config['flip_score_colors']);
+        // Config code here
     });
 
     $('input').on('mousedown', function(e) {

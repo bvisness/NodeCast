@@ -11,10 +11,10 @@
 </head>
 
 <body class="cp-live">
-    <div class="castle left alliance-color" data-strength="8">
+    <div class="castle left red" data-strength="8">
         <div class="castle-strength">8</div>
     </div>
-    <div class="defenses left alliance-color">
+    <div class="defenses left red">
         <div class="defense" data-strength="2"></div>
         <div class="defense" data-strength="2"></div>
         <div class="defense" data-strength="2"></div>
@@ -28,30 +28,30 @@
     </div>
     <div class="center-container">
         <div class="scores">
-            <input class="score left alliance-color" value="0"></input>
-            <input class="score right alliance-color" value="0"></input>
+            <input class="score left red" value="0"></input>
+            <input class="score right blue" value="0"></input>
         </div>
         <div class="teams-container">
-            <div class="teams left alliance-color">
+            <div class="teams left red">
                 <input class="team"></input>
                 <input class="team"></input>
                 <input class="team"></input>
             </div>
-            <div class="teams right alliance-color">
+            <div class="teams right blue">
                 <input class="team"></input>
                 <input class="team"></input>
                 <input class="team"></input>
             </div>
         </div>
     </div>
-    <div class="defenses right alliance-color">
+    <div class="defenses right blue">
         <div class="defense" data-strength="2"></div>
         <div class="defense" data-strength="2"></div>
         <div class="defense" data-strength="2"></div>
         <div class="defense" data-strength="2"></div>
         <div class="defense" data-strength="2"></div>
     </div>
-    <div class="castle right alliance-color" data-strength="8">
+    <div class="castle right blue" data-strength="8">
         <div class="castle-strength">8</div>
     </div>
 </body>
