@@ -29,6 +29,15 @@ function validateNumericInput(element) {
     }
 }
 
+function validateMatchKey(key) {
+    var re = /^((qf|sf|f)\d+m\d+|qm\d+)$/;
+    if (re.test(key)) {
+        sendMatchState();
+    } else {
+        $('.match-key').val($('.match-key').attr('data-prev-value'));
+    }
+}
+
 function defenseStrengthDown(defense) {
     var strength = parseInt($(defense).attr('data-strength'), 10);
     strength = Math.max(0, strength - 1);
@@ -71,7 +80,7 @@ function sendMatchState() {
         'type': 'match_update',
         'match_state': {
             'info': {
-                'match_key': 'qmXX',
+                'match_key': $('.match-key').val(),
                 'teams': {
                     'red': [
                         $('.teams.red .team').eq(0).val(),
@@ -168,6 +177,11 @@ $(document).ready(function() {
     $('.castle-up-btn').on('click', function(e) {
         var castle = $(this).parents('.castle');
         castleStrengthUp(castle);
+    });
+
+    // Configure match key input
+    $('.match-key').on('blur', function(e) {
+        validateMatchKey($(this).val());
     });
 
     // Configure keypresses

@@ -14,6 +14,9 @@
 <body class="cp-live">
     <div class="center-container">
         <div class="wide-container">
+            <div class="match-info">
+                <input class="match-key" placeholder="Match Key">
+            </div>
             <div class="timer"></div>
             <div class="scores">
                 <input class="score left red" value="0">

@@ -66,7 +66,8 @@ simpleapi.registerSingletonResource("config", {
     "event_name": "string",
     "is_red_left": "boolean",
     "flip_score_colors": "boolean",
-    "max_tower_strength": "number"
+    "max_tower_strength": "number",
+    "num_qualification_matches": "number"
 });
 simpleapi.registerResource("team", {
     "number": "number",

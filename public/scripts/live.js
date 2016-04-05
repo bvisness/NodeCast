@@ -76,6 +76,33 @@ function setBlueDefenseStrengths(strengths) {
     }
 }
 
+function setMatchDescriptionFromKey(key) {
+    var qm_re = /qm(\d+)/;
+    var qf_re = /qf(\d+)m(\d+)/;
+    var sf_re = /sf(\d+)m(\d+)/;
+    var f_re = /f(\d+)m(\d+)/;
+
+    var desc = '';
+    var match;
+    if (qm_re.test(key)) {
+        match = qm_re.exec(key);
+        desc = 'Qualification ' + match[1] + ' of ' + config['num_qualification_matches'];
+    } else if (qf_re.test(key)) {
+        match = qf_re.exec(key);
+        desc = 'Quaterfinal ' + match[1] + ' Match ' + match[2];
+    } else if (sf_re.test(key)) {
+        match = sf_re.exec(key);
+        desc = 'Semifinal ' + match[1] + ' Match ' + match[2];
+    } else if (f_re.test(key)) {
+        match = f_re.exec(key);
+        desc = 'Final ' + match[1] + ' Match ' + match[2];
+    } else {
+        console.log('Didn\'t recognize key `' + key + '`');
+    }
+
+    $('.info-text.match').text(desc);
+}
+
 function resetMatch() {
     setRedScore(0);
     setBlueScore(0);
@@ -143,6 +170,7 @@ function handleMessage(e) {
         setBlueDefenseStrengths(matchState.defense_strengths.blue);
         setRedTowerStrength(matchState.tower_strengths.red);
         setBlueTowerStrength(matchState.tower_strengths.blue);
+        setMatchDescriptionFromKey(matchState.info.match_key);
     }
 }
 
