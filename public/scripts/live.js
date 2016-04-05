@@ -141,6 +141,8 @@ function handleMessage(e) {
         setBlueTeams(matchState.info.teams.blue);
         setRedDefenseStrengths(matchState.defense_strengths.red);
         setBlueDefenseStrengths(matchState.defense_strengths.blue);
+        setRedTowerStrength(matchState.tower_strengths.red);
+        setBlueTowerStrength(matchState.tower_strengths.blue);
     }
 }
 

@@ -39,6 +39,21 @@ function defenseStrengthUp(defense) {
     sendMatchState();
 }
 
+function castleStrengthDown(castle) {
+    var strength = parseInt($(castle).attr('data-strength'), 10);
+    $(castle).attr('data-strength', strength - 1);
+    $(castle).find('.castle-strength').text(strength - 1);
+    sendMatchState();
+}
+
+function castleStrengthUp(castle) {
+    var strength = parseInt($(castle).attr('data-strength'), 10);
+    strength = Math.min(config['max_tower_strength'], strength + 1);
+    $(castle).attr('data-strength', strength);
+    $(castle).find('.castle-strength').text(strength);
+    sendMatchState();
+}
+
 function sendMatchState() {
     var redDefenseStrengths = [];
     var blueDefenseStrengths = [];
@@ -78,8 +93,8 @@ function sendMatchState() {
                 'blue': blueDefenseStrengths
             },
             'tower_strengths': {
-                'red': 7,
-                'blue': 4
+                'red': parseInt($('.castle.red').attr('data-strength'), 10),
+                'blue': parseInt($('.castle.blue').attr('data-strength'), 10)
             }
         }
     };
@@ -130,6 +145,16 @@ $(document).ready(function() {
     $('.defense-up-btn').on('click', function(e) {
         var defense = $(this).siblings('.defense');
         defenseStrengthUp(defense);
+    });
+
+    // Configure castle up/down buttons
+    $('.castle-down-btn').on('click', function(e) {
+        var castle = $(this).parents('.castle');
+        castleStrengthDown(castle);
+    });
+    $('.castle-up-btn').on('click', function(e) {
+        var castle = $(this).parents('.castle');
+        castleStrengthUp(castle);
     });
 
     // Configure keypresses

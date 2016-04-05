@@ -861,6 +861,7 @@ a {
         background-size: contain;
         background-repeat: no-repeat;
         background-position-x: 50%;
+        position: relative;
 
         .castle-strength {
             text-align: center;
@@ -869,6 +870,25 @@ a {
         }
         &[data-strength="0"] .castle-strength {
             opacity: 0.3;
+        }
+
+        .castle-btn {
+            position: absolute;
+            top: 50%;
+            width: 18px;
+            background-color: white;
+            padding: 0 7px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            color: #666;
+            font-size: 14px;
+            cursor: pointer;   
+        }
+        .castle-down-btn {
+            left: 0;
+        }
+        .castle-up-btn {
+            right: 0;
         }
     }
 }

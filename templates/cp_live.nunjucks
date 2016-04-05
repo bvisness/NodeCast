@@ -61,6 +61,8 @@
             </div>
             <div class="castle left red" data-strength="8">
                 <div class="castle-strength">8</div>
+                <div class="castle-btn castle-down-btn">-</div>
+                <div class="castle-btn castle-up-btn">+</div>
             </div>
         </div>
 
@@ -94,6 +96,8 @@
             </div>
             <div class="castle right blue" data-strength="8">
                 <div class="castle-strength">8</div>
+                <div class="castle-btn castle-down-btn">-</div>
+                <div class="castle-btn castle-up-btn">+</div>
             </div>
         </div>
     </div>
