@@ -22,6 +22,14 @@ function validateNumericInput(element) {
 }
 
 function sendMatchState() {
+    var redDefenseStrengths = [];
+    var blueDefenseStrengths = [];
+    for (var i = 0; i < 5; i++) {
+        var redStrength = parseInt($('.defenses.red .defense').eq(i).attr('data-strength'), 10);
+        var blueStrength = parseInt($('.defenses.blue .defense').eq(i).attr('data-strength'), 10);
+        redDefenseStrengths.push(redStrength);
+        blueDefenseStrengths.push(blueStrength);
+    }
     var msgObject = {
         'type': 'match_update',
         'match_state': {
@@ -48,8 +56,8 @@ function sendMatchState() {
                 'blue': $('.score.blue').val()
             },
             'defense_strengths': {
-                'red': [2, 2, 1, 1, 0],
-                'blue': [2, 2, 1, 1, 0]
+                'red': redDefenseStrengths,
+                'blue': blueDefenseStrengths
             },
             'tower_strengths': {
                 'red': 7,
@@ -76,6 +84,21 @@ $(document).ready(function() {
 
     $('.score, .team').on('blur', function(e) {
         validateNumericInput(this);
+    });
+
+    $('.defense-down-btn').on('click', function(e) {
+        var defense = $(this).siblings('.defense');
+        var strength = parseInt($(defense).attr('data-strength'), 10);
+        strength = Math.max(0, strength - 1);
+        $(defense).attr('data-strength', strength);
+        sendMatchState();
+    });
+    $('.defense-up-btn').on('click', function(e) {
+        var defense = $(this).siblings('.defense');
+        var strength = parseInt($(defense).attr('data-strength'), 10);
+        strength = Math.min(2, strength + 1);
+        $(defense).attr('data-strength', strength);
+        sendMatchState();
     });
 
     $(document).on('keydown', function(e) {

@@ -786,9 +786,29 @@ a {
         $defense-height: 18px;
 
         display: inline-block;
+        width: 100%;
 
+        .defense-container {
+            text-align: center;
+
+            & > * {
+                vertical-align: top;
+            }
+        }
+        .defense-btn {
+            display: inline-block;
+            background-color: white;
+            padding: 0 7px;
+            margin: 0 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            color: #666;
+            font-size: 14px;
+            cursor: pointer;
+        }
         .defense {
             position: relative;
+            display: inline-block;
             width: $defense-width;
             height: $defense-height;
             margin-bottom: 8px;

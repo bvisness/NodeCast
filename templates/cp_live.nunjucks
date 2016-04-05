@@ -32,11 +32,31 @@
 
         <div class="left-container">
             <div class="defenses left red">
-                <div class="defense" data-strength="2"></div>
-                <div class="defense" data-strength="2"></div>
-                <div class="defense" data-strength="2"></div>
-                <div class="defense" data-strength="2"></div>
-                <div class="defense" data-strength="2"></div>
+                <div class="defense-container">
+                    <div class="defense-btn defense-down-btn">-</div>
+                    <div class="defense" data-strength="2"></div>
+                    <div class="defense-btn defense-up-btn">+</div>
+                </div>
+                <div class="defense-container">
+                    <div class="defense-btn defense-down-btn">-</div>
+                    <div class="defense" data-strength="2"></div>
+                    <div class="defense-btn defense-up-btn">+</div>
+                </div>
+                <div class="defense-container">
+                    <div class="defense-btn defense-down-btn">-</div>
+                    <div class="defense" data-strength="2"></div>
+                    <div class="defense-btn defense-up-btn">+</div>
+                </div>
+                <div class="defense-container">
+                    <div class="defense-btn defense-down-btn">-</div>
+                    <div class="defense" data-strength="2"></div>
+                    <div class="defense-btn defense-up-btn">+</div>
+                </div>
+                <div class="defense-container">
+                    <div class="defense-btn defense-down-btn">-</div>
+                    <div class="defense" data-strength="2"></div>
+                    <div class="defense-btn defense-up-btn">+</div>
+                </div>
             </div>
             <div class="castle left red" data-strength="8">
                 <div class="castle-strength">8</div>
@@ -45,11 +65,31 @@
 
         <div class="right-container">
             <div class="defenses right blue">
-                <div class="defense" data-strength="2"></div>
-                <div class="defense" data-strength="2"></div>
-                <div class="defense" data-strength="2"></div>
-                <div class="defense" data-strength="2"></div>
-                <div class="defense" data-strength="2"></div>
+                <div class="defense-container">
+                    <div class="defense-btn defense-down-btn">-</div>
+                    <div class="defense" data-strength="2"></div>
+                    <div class="defense-btn defense-up-btn">+</div>
+                </div>
+                <div class="defense-container">
+                    <div class="defense-btn defense-down-btn">-</div>
+                    <div class="defense" data-strength="2"></div>
+                    <div class="defense-btn defense-up-btn">+</div>
+                </div>
+                <div class="defense-container">
+                    <div class="defense-btn defense-down-btn">-</div>
+                    <div class="defense" data-strength="2"></div>
+                    <div class="defense-btn defense-up-btn">+</div>
+                </div>
+                <div class="defense-container">
+                    <div class="defense-btn defense-down-btn">-</div>
+                    <div class="defense" data-strength="2"></div>
+                    <div class="defense-btn defense-up-btn">+</div>
+                </div>
+                <div class="defense-container">
+                    <div class="defense-btn defense-down-btn">-</div>
+                    <div class="defense" data-strength="2"></div>
+                    <div class="defense-btn defense-up-btn">+</div>
+                </div>
             </div>
             <div class="castle right blue" data-strength="8">
                 <div class="castle-strength">8</div>

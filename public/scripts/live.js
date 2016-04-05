@@ -62,6 +62,20 @@ function setBlueTeams(teams) {
     }
 }
 
+function setRedDefenseStrengths(strengths) {
+    for (var i = 0; i < 5; i++) {
+        var defense = $('.defenses.red .defense').eq(i);
+        $(defense).attr('data-strength', strengths[i]);
+    }
+}
+
+function setBlueDefenseStrengths(strengths) {
+    for (var i = 0; i < 5; i++) {
+        var defense = $('.defenses.blue .defense').eq(i);
+        $(defense).attr('data-strength', strengths[i]);
+    }
+}
+
 function resetMatch() {
     setRedScore(0);
     setBlueScore(0);
@@ -125,6 +139,8 @@ function handleMessage(e) {
         setBlueScore(matchState.scores.blue);
         setRedTeams(matchState.info.teams.red);
         setBlueTeams(matchState.info.teams.blue);
+        setRedDefenseStrengths(matchState.defense_strengths.red);
+        setBlueDefenseStrengths(matchState.defense_strengths.blue);
     }
 }
 
