@@ -21,6 +21,8 @@
             </div>
             <div class="match-container">
                 <div class="castle left alliance-color" data-strength="8">
+                    <div class="castle-fill"></div>
+                    <div class="castle-img"></div>
                     <div class="castle-strength">8</div>
                 </div>
                 <div class="defenses left alliance-color">
@@ -58,6 +60,8 @@
                     <div class="defense" data-strength="2"></div>
                 </div>
                 <div class="castle right alliance-color" data-strength="8">
+                    <div class="castle-fill"></div>
+                    <div class="castle-img"></div>
                     <div class="castle-strength">8</div>
                 </div>
             </div>

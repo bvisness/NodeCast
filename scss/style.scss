@@ -636,10 +636,7 @@ a {
                 width: 150px;
                 height: $match-content-height;
                 top: $match-padding;
-                background-image: url('/images/castle.svg');
-                background-size: contain;
-                background-repeat: no-repeat;
-                background-position-x: 50%;
+                background-color: #bbb;
 
                 &.left {
                     left: 75px;
@@ -648,7 +645,32 @@ a {
                     right: 75px;
                 }
 
+                .castle-fill {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    bottom: 0;
+                    left: 0;
+                }
+                &.red .castle-fill {
+                    background-color: $red;
+                }
+                &.blue .castle-fill {
+                    background-color: $blue;
+                }
+
+                .castle-img {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-image: url("/images/castle_inverted.svg");
+                    background-repeat: no-repeat;
+                }
+
                 .castle-strength {
+                    position: relative;
                     text-align: center;
                     font-size: 48px;
                     padding-top: 60px;
