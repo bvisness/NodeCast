@@ -27,6 +27,8 @@
             <div class="scores">
                 <input class="score left red" value="0">
                 <input class="score right blue" value="0">
+                <div class="score-key-helper left red"></div>
+                <div class="score-key-helper right blue"></div>
             </div>
             <div class="teams left red">
                 <input class="team">

@@ -785,6 +785,24 @@ a {
                 background-color: $blue;
             }
         }
+
+        .score-key-helper {
+            position: absolute;
+            bottom: 6px;
+
+            &.left {
+                left: 9px;
+            }
+            &.right {
+                right: 9px;
+            }
+            &.red {
+                color: #b30003;
+            }
+            &.blue {
+                color: #314d81;
+            }
+        }
     }
 
     .teams {

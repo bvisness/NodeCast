@@ -121,6 +121,9 @@ function addKeyHelpers() {
         $(element).attr('data-content', keyboardMap[code]);
     }
 
+    $('.score-key-helper.red').text(keyboardMap[KEY_EDIT_RED_SCORE]);
+    $('.score-key-helper.blue').text(keyboardMap[KEY_EDIT_BLUE_SCORE]);
+
     for (var i = 0; i < 5; i++) {
         var redDefenseDownBtn = $('.defenses.red .defense-down-btn').eq(i);
         var redDefenseUpBtn = $('.defenses.red .defense-up-btn').eq(i);
