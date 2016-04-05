@@ -1,5 +1,9 @@
-var KEY_EDIT_RED_SCORE = 82; // r
-var KEY_EDIT_BLUE_SCORE = 66; // b
+var KEY_EDIT_RED_SCORE = 84; // t
+var KEY_EDIT_BLUE_SCORE = 89; // y
+var KEYS_RED_DEFENSES_DOWN = [90, 88, 67, 86, 66]; // z, x, c, v, b
+var KEYS_RED_DEFENSES_UP = [65, 83, 68, 70, 71]; // a, s, d, f, g
+var KEYS_BLUE_DEFENSES_DOWN = [78, 77, 188, 190, 191]; // n, m, ,, ., /
+var KEYS_BLUE_DEFENSES_UP = [74, 75, 76, 186, 222]; // j, k, l, ;, '
 
 var active_keys;
 
@@ -19,6 +23,20 @@ function validateNumericInput(element) {
     } else {
         $(element).val($(element).attr('data-prev-value'));
     }
+}
+
+function defenseStrengthDown(defense) {
+    var strength = parseInt($(defense).attr('data-strength'), 10);
+    strength = Math.max(0, strength - 1);
+    $(defense).attr('data-strength', strength);
+    sendMatchState();
+}
+
+function defenseStrengthUp(defense) {
+    var strength = parseInt($(defense).attr('data-strength'), 10);
+    strength = Math.min(2, strength + 1);
+    $(defense).attr('data-strength', strength);
+    sendMatchState();
 }
 
 function sendMatchState() {
@@ -88,17 +106,11 @@ $(document).ready(function() {
 
     $('.defense-down-btn').on('click', function(e) {
         var defense = $(this).siblings('.defense');
-        var strength = parseInt($(defense).attr('data-strength'), 10);
-        strength = Math.max(0, strength - 1);
-        $(defense).attr('data-strength', strength);
-        sendMatchState();
+        defenseStrengthDown(defense);
     });
     $('.defense-up-btn').on('click', function(e) {
         var defense = $(this).siblings('.defense');
-        var strength = parseInt($(defense).attr('data-strength'), 10);
-        strength = Math.min(2, strength + 1);
-        $(defense).attr('data-strength', strength);
-        sendMatchState();
+        defenseStrengthUp(defense);
     });
 
     $(document).on('keydown', function(e) {
@@ -114,6 +126,21 @@ $(document).ready(function() {
         case KEY_EDIT_BLUE_SCORE:
             editInput($('.score.blue'));
             break;
+        }
+
+        var keyIndex;
+        if ((keyIndex = KEYS_RED_DEFENSES_DOWN.indexOf(e.keyCode)) !== -1) {
+            var defense = $('.defenses.red .defense').eq(keyIndex);
+            defenseStrengthDown(defense);
+        } else if ((keyIndex = KEYS_RED_DEFENSES_UP.indexOf(e.keyCode)) !== -1) {
+            var defense = $('.defenses.red .defense').eq(keyIndex);
+            defenseStrengthUp(defense);
+        } else if ((keyIndex = KEYS_BLUE_DEFENSES_DOWN.indexOf(e.keyCode)) !== -1) {
+            var defense = $('.defenses.blue .defense').eq(keyIndex);
+            defenseStrengthDown(defense);
+        } else if ((keyIndex = KEYS_BLUE_DEFENSES_UP.indexOf(e.keyCode)) !== -1) {
+            var defense = $('.defenses.blue .defense').eq(keyIndex);
+            defenseStrengthUp(defense);
         }
     });
 
