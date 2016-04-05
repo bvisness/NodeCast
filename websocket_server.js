@@ -35,7 +35,7 @@ module.exports.init = function(httpServer) {
             console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
         });
 
-        clients[id].sendUTF("Welcome to the WebSocket server!");
+        clients[id].sendUTF('{"message_type": "welcome", "body": "Welcome to the WebSocket server!"}');
     });
 }
 
