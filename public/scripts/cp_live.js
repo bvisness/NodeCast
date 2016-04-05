@@ -19,6 +19,10 @@ function setLeftRightColors(isRedLeft, flipScoreColors) {
 }
 
 function editInput(element) {
+    if ($(element).is(':focus')) {
+        return;
+    }
+    
     $(element).attr('data-prev-value', $(element).val());
     $(element).val('').focus();
 }
