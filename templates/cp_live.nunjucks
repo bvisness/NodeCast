@@ -16,18 +16,18 @@
         <div class="wide-container">
             <div class="timer"></div>
             <div class="scores">
-                <input class="score left red" value="0"></input>
-                <input class="score right blue" value="0"></input>
+                <input class="score left red" value="0">
+                <input class="score right blue" value="0">
             </div>
             <div class="teams left red">
-                <input class="team"></input>
-                <input class="team"></input>
-                <input class="team"></input>
+                <input class="team">
+                <input class="team">
+                <input class="team">
             </div>
             <div class="teams right blue">
-                <input class="team"></input>
-                <input class="team"></input>
-                <input class="team"></input>
+                <input class="team">
+                <input class="team">
+                <input class="team">
             </div>
         </div>
 
