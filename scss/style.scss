@@ -696,6 +696,24 @@ a {
         margin-right: auto;
         position: relative;
     }
+    .wide-container {
+        width: 100%;
+        height: 180px;
+    }
+    .left-container, .right-container {
+        width: 50%;
+        padding-top: 50px;
+        box-sizing: border-box;
+        text-align: center;
+    }
+    .left-container {
+        float: left;
+        padding-left: 25%;
+    }
+    .right-container {
+        float: right;
+        padding-right: 25%;
+    }
 
     .timer {
         overflow: hidden;
@@ -748,15 +766,77 @@ a {
         .team {
             width: 100px;
             height: 20px;
-            padding: 3px 20px;
+            padding: 6px 20px;
             margin-bottom: 8px;
             font-size: 24px;
             background-color: white;
             position: relative;
+            border: 0;
 
             &:first-of-type {
                 margin-top: 8px;
             }
+        }
+    }
+
+    .defenses {
+        $defenses-inset: 19%;
+        $defenses-top-padding: 15px;
+        $defense-width: 120px;
+        $defense-height: 18px;
+
+        display: inline-block;
+
+        .defense {
+            position: relative;
+            width: $defense-width;
+            height: $defense-height;
+            margin-bottom: 8px;
+            background-color: #bbb;
+        }
+
+        .defense::after {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: $defense-height;
+        }
+
+        .defense[data-strength="2"]::after {
+            width: 100%;
+        }
+
+        .defense[data-strength="1"]::after {
+            width: 50%;
+        }
+
+        &.red .defense::after {
+            background-color: $red;
+        }
+        &.blue .defense::after {
+            background-color: $blue;
+        }
+    }
+
+    .castle {
+        display: inline-block;
+        width: 150px;
+        height: 150px;
+        margin-top: 40px;
+        background-image: url('/images/castle.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position-x: 50%;
+
+        .castle-strength {
+            text-align: center;
+            font-size: 48px;
+            padding-top: 60px;
+        }
+        &[data-strength="0"] .castle-strength {
+            opacity: 0.3;
         }
     }
 }
