@@ -497,6 +497,10 @@ a {
 
                 .timer-scores {
                     $timer-height: 40px;
+                    $official-review-height: 30px;
+                    $flag-height: 20px;
+                    $score-height: $match-content-height - $timer-height - $flag-height;
+                    $official-review-transition-duration: 500ms;
 
                     width: $timer-scores-width;
                     height: 100%;
@@ -525,14 +529,13 @@ a {
                     }
 
                     .score {
-                        $flag-height: 20px;
-
                         width: 50%;
-                        height: $match-content-height - $timer-height - $flag-height;
+                        height: $score-height;
                         margin-top: $timer-height;
                         text-align: center;
                         font-size: 80px;
                         padding-top: 5px;
+                        transition: all $official-review-transition-duration ease;
 
                         &.left {
                             float: left;
@@ -568,6 +571,32 @@ a {
                             border-width: 0 ($timer-scores-width / 4) $flag-height;
                             position: absolute;
                             bottom: 0;
+                        }
+                    }
+
+                    .official-review {
+                        position: absolute;
+                        width: 100%;
+                        height: 0;
+                        top: $timer-height;
+                        background-color: yellow;
+                        text-align: center;
+                        font-size: 20px;
+                        line-height: $official-review-height;
+                        color: rgba(0, 0, 0, 0);
+                        transition: all $official-review-transition-duration ease;
+                        overflow: hidden;
+                    }
+
+                    &.official-review {
+                        .score {
+                            height: $score-height - $official-review-height;
+                            margin-top: $timer-height + $official-review-height;
+                            font-size: 60px;
+                        }
+                        .official-review {
+                            color: rgba(0, 0, 0, 1);
+                            height: $official-review-height;
                         }
                     }
                 }
@@ -824,6 +853,22 @@ a {
             &.blue {
                 color: #314d81;
             }
+        }
+    }
+
+    .official-review-btn {
+        width: 50%;
+        height: 29px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: #eee;
+        border-top: 1px solid #ccc;
+        line-height: 30px;
+        text-align: center;
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: underline;
         }
     }
 

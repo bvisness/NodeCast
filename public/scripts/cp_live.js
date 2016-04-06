@@ -12,6 +12,7 @@ var KEY_BLUE_CASTLE_UP = 80; // p
 var matchPeriod;
 var autoStartTime;
 var teleopStartTime;
+var officialReview = false;
 
 function editInput(element) {
     if ($(element).is(':focus')) {
@@ -110,7 +111,8 @@ function sendMatchState() {
             'tower_strengths': {
                 'red': parseInt($('.castle.red').attr('data-strength'), 10),
                 'blue': parseInt($('.castle.blue').attr('data-strength'), 10)
-            }
+            },
+            'official_review': officialReview
         }
     };
     sendWebSocketMessage(JSON.stringify(msgObject));
@@ -208,6 +210,12 @@ $(document).ready(function() {
         matchPeriod = 'inactive';
         sendMatchState();
     });
+
+    // Configure official review button
+    $('.official-review-btn').on('click', function(e) {
+        officialReview = !officialReview;
+        sendMatchState();
+    })
 
     // Configure keypresses
     $(document).on('keydown', function(e) {

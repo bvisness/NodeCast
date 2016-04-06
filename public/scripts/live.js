@@ -82,6 +82,14 @@ function setBlueDefenseStrengths(strengths) {
     }
 }
 
+function setOfficialReviewActive(active) {
+    if (active) {
+        $('.timer-scores').addClass('official-review');
+    } else {
+        $('.timer-scores').removeClass('official-review');
+    }
+}
+
 function setMatchDescriptionFromKey(key) {
     var qm_re = /qm(\d+)/;
     var qf_re = /qf(\d+)m(\d+)/;
@@ -182,6 +190,7 @@ function handleMessage(e) {
         setBlueDefenseStrengths(matchState.defense_strengths.blue);
         setRedTowerStrength(matchState.tower_strengths.red);
         setBlueTowerStrength(matchState.tower_strengths.blue);
+        setOfficialReviewActive(matchState.official_review);
         setMatchDescriptionFromKey(matchState.info.match_key);
     }
 }

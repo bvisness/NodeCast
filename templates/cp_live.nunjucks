@@ -23,7 +23,7 @@
                 <div class="time-button cancel-match">Abort Match</div>
                 <div class="time-button reset-match">Reset</div>
             </div>
-            <div class="timer"></div>
+            <div class="official-review-btn">Toggle Official Review</div>
             <div class="scores">
                 <input class="score left red" value="0">
                 <input class="score right blue" value="0">

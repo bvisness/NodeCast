@@ -43,6 +43,7 @@
                             <div class="timer-fill"></div>
                             <div class="timer-count">0</div>
                         </div>
+                        <div class="official-review visible">Official Review</div>
                         <div class="score left alliance-color">0</div>
                         <div class="score right alliance-color">0</div>
                     </div>
