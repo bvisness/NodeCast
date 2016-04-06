@@ -148,7 +148,8 @@ $(document).ready(function() {
     addKeyHelpers();
 
     getConfig(function() {
-        // Config code here
+        $('.castle').attr('data-strength', config['max_tower_strength']);
+        $('.castle-strength').text(config['max_tower_strength']);
     });
 
     // Configure editing of inputs in general
