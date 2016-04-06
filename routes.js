@@ -14,4 +14,9 @@ module.exports.addWebcastRoutes = function(app) {
             'title': 'Live Control Panel'
         });
     });
+    app.get('/cpconfig', function(req, res) {
+        res.render('cp_config', {
+            'title': 'Config Control Panel'
+        });
+    });
 }

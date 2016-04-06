@@ -1026,3 +1026,17 @@ a {
         }
     }
 }
+
+.cp-config {
+    background-color: #eee;
+    padding: 60px;
+
+    .field {
+        height: 30px;
+        line-height: 30px;
+    }
+
+    .result {
+        margin-top: 50px;
+    }
+}

@@ -17,6 +17,4 @@ Once the server is up and running, open a web browser and go to `http://localhos
 Open another browser window and go to `http://localhost:8081/cplive`. This is the control panel for the live overlay. Experiment with the different options; what they do should be self-evident.
 
 ## Configuring Global Settings
-The application saves global settings, such as the event name, number of qualification matches, and visual settings. Currently there is no control panel for these, but you can view and edit them by making GET, PATCH, and PUT requests to `http://localhost:8081/api/config`.
-
-We recommend [Postman](https://www.getpostman.com/) or any other good REST client for making these changes.
+The application saves global settings, such as the event name, number of qualification matches, and visual settings. You can edit them by going to `http://localhost:8081/cpconfig`.
