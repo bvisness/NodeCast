@@ -31,14 +31,14 @@
                 <div class="score-key-helper right blue"></div>
             </div>
             <div class="teams left red">
-                <input class="team">
-                <input class="team">
-                <input class="team">
+                <input class="team" placeholder="Team #">
+                <input class="team" placeholder="Team #">
+                <input class="team" placeholder="Team #">
             </div>
             <div class="teams right blue">
-                <input class="team">
-                <input class="team">
-                <input class="team">
+                <input class="team" placeholder="Team #">
+                <input class="team" placeholder="Team #">
+                <input class="team" placeholder="Team #">
             </div>
         </div>
 
