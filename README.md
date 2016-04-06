@@ -2,7 +2,7 @@
 Webcasting overlays for FRC, built in Node.js
 
 ## Installing
-Make sure you have [Node.js](https://nodejs.org/) installed. No further installation should be necessary.
+Make sure you have [Node.js](https://nodejs.org/) installed. Then open a terminal prompt, navigate to the project root directory and run `npm install`.
 
 ## Starting the Server
 Open a terminal prompt and navigate to the project root directory. Then run the following:
